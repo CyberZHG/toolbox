@@ -25,6 +25,14 @@ while True:
         with open(file_path) as reader:
             title = reader.readline().strip()[4:-3].strip()
             prefix = file_name[:-5]
+            css_path = 'css/' + prefix + '.css'
+            if not os.path.exists(css_path):
+                with open(css_path, 'w') as writer:
+                    pass
+            js_path = 'js/' + prefix + '.js'
+            if not os.path.exists(js_path):
+                with open(js_path, 'w') as writer:
+                    pass
             html = template.replace(MAGIC_TITLE, title) \
                            .replace(MAGIC_BODY, reader.read()) \
                            .replace(MAGIC_CSS, prefix) \
