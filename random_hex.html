@@ -66,27 +66,30 @@
 
     <div class="container-fluid container-body">
 <!-- Body Begin -->
-<div class="row">
-  <span class="col-md-12">
-    <h2>Contents</h2>
-  </span>
-</div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>Random</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-2 col-xs-12">
-    <a href="random_hex">Random Hex</a>
-  </span>
-  <span class="col-sm-9 col-xs-12">
-    Generate random hexadecimal strings.
-  </span>
-</div>
+<style>
+#div_num {
+    font-family: Consolas;
+}
+</style>
+<div id="div_num"></div>
+<script>
+function dec2hex(c) {
+    if (c < 10) {
+            return String.fromCharCode('0'.charCodeAt(0) + c);
+        }
+        return String.fromCharCode('A'.charCodeAt(0) + c - 10);
+}
 
+div_num.innerHTML += '<div class="row">';
+for (var i = 0; i < 480; ++i) {
+    var s = '';
+    for (var j = 0; j < 8; ++j) {
+        s += dec2hex(Math.floor(Math.random() * 16));
+    }
+    div_num.innerHTML += '<span class="col-lg-1 col-md-2 col-sm-3 col-xs-4">' + s + '</span>';
+}
+div_num.innerHTML += '</div>';
+</script>
 <!-- Body End -->
     </div>
 
