@@ -9,5 +9,11 @@ branches:
   only:
     - gh-pages
     - /.*/
+before-install:
+  - pip install pep8
+  - $(which npm) install -g jslint
+before-script:
+  - pep8 *.py
+  - find . -type f -regex "\./js/[a-zA-Z_]+\.js" -print0 | xargs -0 jslint
 script:
-  - python build.py
+  - ls
