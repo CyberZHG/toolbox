@@ -5,5 +5,9 @@ node_js:
   - "6"
   - "node"
   - "iojs"
+branches:
+  only:
+    - gh-pages
+    - /.*/
 script:
-  - ls
+  - python build.py
