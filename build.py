@@ -1,18 +1,24 @@
 import os
 from time import sleep, strftime, gmtime
 
+TEMPLATE_FILE = 'template.html'
 PARTS_FOLDER = 'parts'
 MAGIC_TITLE = 'FC32C705'
 MAGIC_BODY = '75CAF6CF'
 MAGIC_CSS = 'EAC9ED81'
 MAGIC_JS = 'BB33DD4B'
+MAGIC_TEMPLATE = '3B893512'
 
-with open('template.html') as reader:
+with open(TEMPLATE_FILE) as reader:
     template = reader.read()
 
 last = {}
 while True:
     sleep(3)
+    last_modified = os.path.getmtime(TEMPLATE_FILE)
+    if MAGIC_TEMPLATE in last and last[MAGIC_TEMPLATE] != last_modified:
+        last = {}
+    last[MAGIC_TEMPLATE] = last_modified
     for file_name in os.listdir(PARTS_FOLDER):
         if file_name[-5:] != '.html':
             continue
