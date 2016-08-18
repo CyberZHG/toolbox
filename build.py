@@ -19,6 +19,7 @@ while True:
         with open(TEMPLATE_FILE) as reader:
             template = reader.read()
     last[MAGIC_TEMPLATE] = last_modified
+    has_modification = False
     for file_name in os.listdir(PARTS_FOLDER):
         if file_name[-5:] != '.html':
             continue
@@ -26,6 +27,7 @@ while True:
         last_modified = os.path.getmtime(file_path)
         if file_name in last and last_modified == last[file_name]:
             continue
+        has_modification = True
         last[file_name] = last_modified
         print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' ' + file_name)
         with open(file_path) as reader:
@@ -45,3 +47,10 @@ while True:
                            .replace(MAGIC_JS, prefix)
         with open(file_name, 'w') as writer:
             writer.write(html)
+    if has_modification:
+        with open('sitemap.txt', 'w') as writer:
+            writer.write('https://cyberzhg.github.io/toolbox/\n')
+            for file_name in os.listdir(PARTS_FOLDER):
+                if file_name[-5:] != '.html':
+                    continue
+                writer.write('https://cyberzhg.github.io/toolbox/' + file_name[:-5] + '\n')
