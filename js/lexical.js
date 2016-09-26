@@ -19,9 +19,6 @@
 function parseRegex(text) {
     'use strict';
     function parseSub(text, begin, end, first) {
-        if (text.length === 0) {
-            return 'Error: empty input at ' + begin + '.';
-        }
         var i,
             sub,
             last = 0,
@@ -29,6 +26,9 @@ function parseRegex(text) {
             tempNode,
             stack = 0,
             parts = [];
+        if (text.length === 0) {
+            return 'Error: empty input at ' + begin + '.';
+        }
         if (first) {
             for (i = 0; i <= text.length; i += 1) {
                 if (i === text.length || (text[i] === '|' && stack === 0)) {
@@ -107,6 +107,60 @@ function parseRegex(text) {
     return parseSub(text, 0, text.length, true);
 }
 
+function regexToNfa(text) {
+    'use strict';
+    function generateGraph(node, start, end, count) {
+        var i, last, temp, tempStart, tempEnd;
+        if (!start.hasOwnProperty('id')) {
+            start.id = count;
+            count += 1;
+        }
+        switch (node.type) {
+        case 'empty':
+            start.edges.push(['ϵ', end]);
+            break;
+        case 'text':
+            start.edges.push([node.text, end]);
+            break;
+        case 'cat':
+            last = start;
+            for (i = 0; i < node.parts.length - 1; i += 1) {
+                temp = {'type': '', 'edges': []};
+                count = generateGraph(node.parts[i], last, temp, count);
+                last = temp;
+            }
+            count = generateGraph(node.parts[node.parts.length - 1], last, end, count);
+            break;
+        case 'or':
+            for (i = 0; i < node.parts.length; i += 1) {
+                tempStart = {'type': '', 'edges': []};
+                tempEnd = {'type': '', 'edges': [['ϵ', end]]};
+                start.edges.push(['ϵ', tempStart]);
+                count = generateGraph(node.parts[i], tempStart, tempEnd, count);
+            }
+            break;
+        case 'star':
+            tempStart = {'type': '', 'edges': []};
+            tempEnd = {'type': '', 'edges': [['ϵ', tempStart], ['ϵ', end]]};
+            start.edges.push(['ϵ', tempStart]);
+            start.edges.push(['ϵ', end]);
+            count = generateGraph(node.sub, tempStart, tempEnd, count);
+            break;
+        }
+        if (!end.hasOwnProperty('id')) {
+            end.id = count;
+            count += 1;
+        }
+        return count;
+    }
+    var ast = parseRegex(text),
+        start = {'type': 'start', 'edges': []},
+        accept = {'type': 'accept', 'edges': []};
+    generateGraph(ast, start, accept, 0);
+    return start;
+}
+
 if (typeof require === 'function') {
     exports.parseRegex = parseRegex;
+    exports.regexToNfa = regexToNfa;
 }

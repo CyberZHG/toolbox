@@ -7,7 +7,7 @@
     "mocha": "3.0.1"
   },
   "scripts": {
-    "lint": "jslint ./lib/*.js && jslint ./test/*.js",
+    "lint": "jslint ./js/*.js && jslint ./test/*.js",
     "test": "mocha"
   },
   "dependencies": {}
