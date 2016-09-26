@@ -1,11 +1,17 @@
 /*jslint browser: true*/
-/*global $*/
+/*global regexToNfa, genAutomataSVG, $*/
 
 $(document).ready(function () {
     'use strict';
 
     $('#button_convert').click(function () {
-        // TODO
+        var start = regexToNfa($('#input_regex').val());
+        if (typeof start === 'string') {
+            // TODO
+        } else {
+            $('svg').attr("width", $('svg').parent().width());
+            genAutomataSVG('svg', start);
+        }
     });
 
 });
