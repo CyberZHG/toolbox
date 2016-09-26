@@ -1,0 +1,51 @@
+<!-- Regex to NFA -->
+<div class="row">
+  <span class="col-md-3">
+    <div class="well">
+      <h4>Introduction</h4>
+      <hr>
+      <p>
+        Convert simple regular expressions to nondeterministic finite automaton.
+      </p>
+    </div>
+  </span>
+  <span class="col-md-3">
+    <div class="well">
+      <h4>Supported grammars</h4>
+      <ul>
+        <li>r = (s)</li>
+        <li>r = st</li>
+        <li>r = s|t</li>
+        <li>r = s*</li>
+        <li>r = ϵ <br>(Copy this character to input if needed)</li>
+      </ul>
+    </div>
+  </span>
+  <span class="col-md-3">
+    <div class="well">
+      <h4>Examples</h4>
+      <ul>
+        <li>(a|b)*</li>
+        <li>(a*|b*)*</li>
+        <li>((ϵ|a)b*)*</li>
+        <li>(a|b)*abb(a|b)*</li>
+      </ul>
+    </div>
+  </span>
+</div>
+
+<div class="row">
+  <div class="form-group">
+    <label for="input_regex" class="col-md-1 control-label">Input: </label>
+    <div class="col-md-11">
+      <input type="text" class="form-control" id="input_regex" placeholder="((ϵ|a)b*)*">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-10 col-md-2">
+    <button id="button_convert" class="btn btn-raised btn-block btn-primary">Convert</button>
+  </div>
+</div>
+
+<script src="./js/dagre-d3.min.js"></script>
