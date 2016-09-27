@@ -11,7 +11,7 @@ function genAutomataSVG(svgId, start) {
     var ids = {},
         node,
         next,
-        edge,
+        i,
         front = 0,
         queue = [start],
         g = new dagreD3.graphlib.Graph().setGraph({}),
@@ -31,9 +31,9 @@ function genAutomataSVG(svgId, start) {
             node.type = 'normal';
         }
         g.setNode(node.id, {shape: node.type, label: node.id});
-        for (edge in node.edges) {
-            next = node.edges[edge][1];
-            g.setEdge(node.id, next.id, {label: node.edges[edge][0]});
+        for (i = 0; i < node.edges.length; i += 1) {
+            next = node.edges[i][1];
+            g.setEdge(node.id, next.id, {label: node.edges[i][0]});
             if (!ids.hasOwnProperty(next.id)) {
                 queue.push(next);
             }
