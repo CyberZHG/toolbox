@@ -24,10 +24,14 @@ function genAutomataSVG(svgId, start) {
         inner.attr("transform", "translate(" + d3.event.translate + ")" + "scale(" + d3.event.scale + ")");
     });
     svg.call(zoom);
+    g.setNode(-1, {shape: 'text', label: 'start'});
     while (front < queue.length) {
         node = queue[front];
         ids[node.id] = node;
         if (node.type === '' || node.type === 'start') {
+            if (node.type === 'start') {
+                g.setEdge(-1, node.id, {label: ''});
+            }
             node.type = 'normal';
         }
         g.setNode(node.id, {shape: node.type, label: node.id});
@@ -40,6 +44,28 @@ function genAutomataSVG(svgId, start) {
         }
         front += 1;
     }
+
+    render.shapes().text = function (parent, bbox, node) {
+        var w = bbox.width,
+            h = bbox.height,
+            rx = Math.min(w / 2, h / 2),
+            ry = rx,
+            point = {x: w / 2, y: h / 2},
+            shapeSvg = parent
+                .insert("ellipse", ":first-child")
+                .attr("cx", point.x)
+                .attr("cy", point.y)
+                .attr("rx", rx)
+                .attr("ry", ry)
+                .attr("fill-opacity", "0")
+                .attr("stroke-opacity", "0")
+                .attr("transform", "translate(" + (-w / 2) + "," + (-h / 2) + ")");
+
+        node.intersect = function (point) {
+            return dagreD3.intersect.ellipse(node, rx, ry, point);
+        };
+        return shapeSvg;
+    };
 
     render.shapes().normal = function (parent, bbox, node) {
         var w = bbox.width,
