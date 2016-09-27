@@ -68,6 +68,8 @@
 
     <div class="container-fluid container-body">
 <!-- Body Begin -->
+<link rel="stylesheet" href="./css/automata.css">
+
 <div class="row">
   <span class="col-md-3">
     <div class="well">
@@ -116,11 +118,24 @@
     <button id="button_convert" class="btn btn-raised btn-block btn-primary">Convert</button>
   </div>
 </div>
+<div id="alert_error" class="alert alert-dismissible alert-danger" hidden>
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Invalid Grammar</strong>
+  <p id="p_error"></p>
+</div>
 <div class="row">
   <div class="col-xs-12">
     <svg id="svg" width="800">
       <g></g>
     </svg>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+    <label for="input_url" class="col-md-1 control-label">URL: </label>
+    <div class="col-md-11">
+      <input type="text" class="form-control" id="input_url" readonly>
+    </div>
   </div>
 </div>
 

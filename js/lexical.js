@@ -156,6 +156,9 @@ function regexToNfa(text) {
     var ast = parseRegex(text),
         start = {'type': 'start', 'edges': []},
         accept = {'type': 'accept', 'edges': []};
+    if (typeof ast === 'string') {
+        return ast;
+    }
     generateGraph(ast, start, accept, 0);
     return start;
 }

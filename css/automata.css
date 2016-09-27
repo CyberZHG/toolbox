@@ -1,0 +1,9 @@
+.edgePath path {
+    stroke: #000; /* Arrow color */
+    fill: #000; /* Arrow Tip color */
+    stroke-width: 1.5px;
+}
+
+foreignobject {
+    color: #000;
+}
