@@ -2,6 +2,7 @@ https://cyberzhg.github.io/toolbox/
 https://cyberzhg.github.io/toolbox/ascii
 https://cyberzhg.github.io/toolbox/base64_encode
 https://cyberzhg.github.io/toolbox/index
+https://cyberzhg.github.io/toolbox/nfa2dfa
 https://cyberzhg.github.io/toolbox/random_hex
 https://cyberzhg.github.io/toolbox/regex2nfa
 https://cyberzhg.github.io/toolbox/url_encode

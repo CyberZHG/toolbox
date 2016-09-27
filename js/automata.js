@@ -28,10 +28,10 @@ function genAutomataSVG(svgId, start) {
     while (front < queue.length) {
         node = queue[front];
         ids[node.id] = node;
+        if (node === start) {
+            g.setEdge(-1, node.id, {label: ''});
+        }
         if (node.type === '' || node.type === 'start') {
-            if (node.type === 'start') {
-                g.setEdge(-1, node.id, {label: ''});
-            }
             node.type = 'normal';
         }
         g.setNode(node.id, {shape: node.type, label: node.id});
