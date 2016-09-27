@@ -5,7 +5,7 @@ var assert = require('assert');
 var lexical = require('../js/lexical');
 
 describe('Lexical', function () {
-    describe('#parseRegex', function () {
+    describe('#regexToNfa', function () {
         it('Empty', function () {
             var actual = lexical.regexToNfa('ϵ'),
                 nodes = [
