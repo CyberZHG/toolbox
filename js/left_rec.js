@@ -12,7 +12,7 @@ $(document).ready(function () {
     }
 
     function b64DecodeUnicode(str) {
-        return decodeURIComponent(Array.prototype.map.call(window.atob(str), function (c) {
+        return decodeURIComponent(Array.prototype.map.call(window.atob(str.replace(' ', '+')), function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
     }
@@ -37,17 +37,17 @@ $(document).ready(function () {
         var grammar = parseGrammar($('#input_grammar').val()),
             eliminated = eliminateLeftRecursion(grammar),
             pretty = toPretty(eliminated),
-            prefix = window.location.href.split('?')[0] + '?regex=',
+            prefix = window.location.href.split('?')[0] + '?grammar=',
             input = b64EncodeUnicode($('#input_grammar').val());
         $('#input_url').val(prefix + input);
         $('#alert_error').hide();
         $('#output_grammar').text(pretty);
     });
 
-    var input = getParameterByName('regex');
+    var input = getParameterByName('grammar');
     if (input) {
         input = b64DecodeUnicode(input);
-        $('#input_regex').val(input);
+        $('#input_grammar').val(input);
         $('#button_convert').click();
     }
 
