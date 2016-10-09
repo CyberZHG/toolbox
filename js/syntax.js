@@ -56,7 +56,7 @@ function leftFactoring(grammar) {
             generation = grammar[keys[i]];
             for (j = 0; j < generation.length; j += 1) {
                 for (k = j + 1; k < generation.length; k += 1) {
-                    for (l = 0; l < generation[i].length && l < generation[j].length; l += 1) {
+                    for (l = 0; l < generation[j].length && l < generation[k].length; l += 1) {
                         if (generation[j][l] !== generation[k][l]) {
                             break;
                         }
