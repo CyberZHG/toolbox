@@ -83,8 +83,8 @@
       <h4>Supported grammars</h4>
       <ul>
         <li>A -> A c | A a d | b d | ϵ <br>(All tokens must be separated by space characters)</li>
-        <li>A -> A c <br> | A a d <br> | b d <br> | ϵ </li>
-        <li>S -> (L) | a L -> L , S | S</li>
+        <li>A -> A c <br>&nbsp;&nbsp;&nbsp;| A a d <br>&nbsp;&nbsp;&nbsp;| b d <br>&nbsp;&nbsp;&nbsp;| ϵ </li>
+        <li>S -> A a | b<br>A -> A c | S d | ϵ</li>
         <li>(Copy ϵ to input if needed)</li>
       </ul>
     </div>
@@ -130,7 +130,7 @@
 </div>
 <div class="row">
   <div class="form-group">
-    <label for="input_grammar" class="col-md-1 control-label">Output: </label>
+    <label for="output_grammar" class="col-md-1 control-label">Output: </label>
     <div class="col-md-11">
       <textarea type="text" class="form-control" id="output_grammar" rows="10" readonly></textarea>
     </div>
@@ -145,10 +145,7 @@
   </div>
 </div>
 
-<script src="./lib/js/d3.v3.min.js"></script>
-<script src="./lib/js/dagre-d3.min.js"></script>
-<script src="./js/lexical.js"></script>
-<script src="./js/automata.js"></script>
+<script src="./js/syntax.js"></script>
 
 <!-- Body End -->
     </div>
