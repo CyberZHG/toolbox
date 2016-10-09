@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global window, parseGrammar, eliminateLeftRecursion, $*/
+/*global window, parseGrammar, eliminateLeftRecursion, toPretty, $*/
 
 $(document).ready(function () {
     'use strict';
@@ -36,11 +36,12 @@ $(document).ready(function () {
     $('#button_convert').click(function () {
         var grammar = parseGrammar($('#input_grammar').val()),
             eliminated = eliminateLeftRecursion(grammar),
+            pretty = toPretty(eliminated),
             prefix = window.location.href.split('?')[0] + '?regex=',
             input = b64EncodeUnicode($('#input_grammar').val());
         $('#input_url').val(prefix + input);
         $('#alert_error').hide();
-        $('#output_grammar').text(eliminated);
+        $('#output_grammar').text(pretty);
     });
 
     var input = getParameterByName('regex');
