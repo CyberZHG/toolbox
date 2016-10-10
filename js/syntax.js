@@ -187,8 +187,180 @@ function toPretty(grammar) {
     return pretty;
 }
 
+function calcNullables(grammar) {
+    'use strict';
+    var i, j, k,
+        nullables = {},
+        keys = Object.keys(grammar);
+    for (i = 0; i < keys.length; i += 1) {
+        for (j = 0; j < grammar[keys[i]].length; j += 1) {
+            for (k = 0; k < grammar[keys[i]][j].length; k += 1) {
+                if (!grammar.hasOwnProperty(grammar[keys[i]][j][k])) {
+                    nullables[grammar[keys[i]][j][k]] = false;
+                }
+            }
+        }
+    }
+    if (nullables.hasOwnProperty('ϵ')) {
+        nullables['ϵ'] = true;
+    }
+    function calcRec(key, path) {
+        var ii, jj;
+        if (path.indexOf(key) >= 0) {
+            return false;
+        }
+        path = path.concat([key]);
+        if (nullables.hasOwnProperty(key)) {
+            return nullables[key];
+        }
+        for (ii = 0; ii < grammar[key].length; ii += 1) {
+            for (jj = 0; jj < grammar[key][ii].length; jj += 1) {
+                if (!calcRec(grammar[key][ii][jj], path)) {
+                    break;
+                }
+            }
+            if (jj === grammar[key][ii].length) {
+                nullables[key] = true;
+                return true;
+            }
+        }
+        nullables[key] = false;
+        return false;
+    }
+    keys.forEach(function (key) {
+        calcRec(key, []);
+    });
+    return nullables;
+}
+
+function calcFirsts(grammar) {
+    'use strict';
+    var i, j, k,
+        nullables = calcNullables(grammar),
+        firsts = {},
+        finished = false,
+        keys = Object.keys(grammar);
+    for (i = 0; i < keys.length; i += 1) {
+        for (j = 0; j < grammar[keys[i]].length; j += 1) {
+            for (k = 0; k < grammar[keys[i]][j].length; k += 1) {
+                if (!grammar.hasOwnProperty(grammar[keys[i]][j][k])) {
+                    firsts[grammar[keys[i]][j][k]] = [grammar[keys[i]][j][k]];
+                }
+            }
+        }
+    }
+    function calcRec(key, path) {
+        var ii, jj, kk, first;
+        if (!grammar.hasOwnProperty(key)) {
+            return firsts[key];
+        }
+        if (path.indexOf(key) >= 0) {
+            if (firsts.hasOwnProperty(key)) {
+                return firsts[key];
+            }
+            return false;
+        }
+        path = path.concat([key]);
+        if (!firsts.hasOwnProperty(key)) {
+            firsts[key] = [];
+            finished = false;
+        }
+        for (ii = 0; ii < grammar[key].length; ii += 1) {
+            for (jj = 0; jj < grammar[key][i].length; jj += 1) {
+                first = calcRec(grammar[key][ii][jj], path);
+                for (kk = 0; kk < first.length; kk += 1) {
+                    if (firsts[key].indexOf(first[kk]) < 0) {
+                        firsts[key].push(first[kk]);
+                        finished = false;
+                    }
+                }
+                if (!nullables[grammar[key][ii][jj]]) {
+                    break;
+                }
+            }
+        }
+        return firsts[key];
+    }
+    while (!finished) {
+        finished = true;
+        for (i = 0; i < keys.length; i += 1) {
+            calcRec(keys[i], []);
+        }
+    }
+    Object.keys(firsts).forEach(function (key) {
+        firsts[key].sort();
+    });
+    return firsts;
+}
+
+function calcFollows(grammar, start) {
+    'use strict';
+    return grammar + start;
+    /*
+    var i, j, k,
+        nullables = calcNullables(grammar),
+        firsts = calcFirsts(grammar),
+        follows = {},
+        finished = false,
+        keys = Object.keys(grammar);
+    for (i = 0; i < keys.length; i += 1) {
+        for (j = 0; j < grammar[keys[i]].length; j += 1) {
+            for (k = 0; k < grammar[keys[i]][j].length; k += 1) {
+                if (!grammar.hasOwnProperty(grammar[keys[i]][j][k])) {
+                    firsts[grammar[keys[i]][j][k]] = [grammar[keys[i]][j][k]];
+                }
+            }
+        }
+    }
+    function calcRec(key, path) {
+        var ii, jj, kk, first;
+        if (!grammar.hasOwnProperty(key)) {
+            return firsts[key];
+        }
+        if (path.indexOf(key) >= 0) {
+            if (firsts.hasOwnProperty(key)) {
+                return firsts[key];
+            }
+            return false;
+        }
+        path = path.concat([key]);
+        if (!firsts.hasOwnProperty(key)) {
+            firsts[key] = [];
+            finished = false;
+        }
+        for (ii = 0; ii < grammar[key].length; ii += 1) {
+            for (jj = 0; jj < grammar[key][i].length; jj += 1) {
+                first = calcRec(grammar[key][ii][jj], path);
+                for (kk = 0; kk < first.length; kk += 1) {
+                    if (firsts[key].indexOf(first[kk]) < 0) {
+                        firsts[key].push(first[kk]);
+                        finished = false;
+                    }
+                }
+                if (!nullables[grammar[key][ii][jj]]) {
+                    break;
+                }
+            }
+        }
+        return firsts[key];
+    }
+    while (!finished) {
+        finished = true;
+        for (i = 0; i < keys.length; i += 1) {
+            calcRec(keys[i], []);
+        }
+    }
+    Object.keys(firsts).forEach(function (key) {
+        firsts[key].sort();
+    });
+    return firsts;*/
+}
+
 if (typeof require === 'function') {
     exports.parseGrammar = parseGrammar;
     exports.leftFactoring = leftFactoring;
     exports.eliminateLeftRecursion = eliminateLeftRecursion;
+    exports.calcNullables = calcNullables;
+    exports.calcFirsts = calcFirsts;
+    exports.calcFollows = calcFollows;
 }
