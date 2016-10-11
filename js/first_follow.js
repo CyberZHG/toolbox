@@ -36,9 +36,9 @@ $(document).ready(function () {
     $('#button_compute').click(function () {
         var grammar = parseGrammar($('#input_grammar').val()),
             nullables = calcNullables(grammar),
-            firsts = calcFirsts(grammar),
-            follows = calcFollows(grammar),
-            symbols = Object.keys(nullables),
+            firsts = calcFirsts(grammar, nullables),
+            follows = calcFollows(grammar, nullables, firsts),
+            symbols = Object.keys(follows),
             html = '',
             prefix = window.location.href.split('?')[0] + '?grammar=',
             input = b64EncodeUnicode($('#input_grammar').val());
@@ -59,8 +59,8 @@ $(document).ready(function () {
             html += '<tr>';
             html += '<td>' + symbol + '</td>';
             html += '<td>' + nullables[symbol] + '</td>';
-            html += '<td>{' + firsts[symbol] + '}</td>';
-            html += '<td>{' + follows[symbol] + '}</td>';
+            html += '<td>' + firsts[symbol].join(' ') + '</td>';
+            html += '<td>' + follows[symbol].join(' ') + '</td>';
             html += '</tr>';
         });
         html += '</tbody>';
