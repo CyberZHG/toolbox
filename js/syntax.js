@@ -1,6 +1,11 @@
 /*jslint browser: true*/
 /*global require, exports*/
 
+/**
+ * Structure:
+ * grammar {key => head, value => array of body}
+ * body {array of string}
+ */
 function parseGrammar(text) {
     'use strict';
     var index = 0,
@@ -387,6 +392,66 @@ function constructLL1ParsingTable(grammar) {
     return table;
 }
 
+function isSameItem(a, b) {
+    'use strict';
+    var i;
+    if (a.head !== b.head || a.body.length !== b.body.length) {
+        return false;
+    }
+    for (i = 0; i < a.body.length; i += 1) {
+        if (a.body[i] !== b.body[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function isInItems(item, items) {
+    'use strict';
+    var i;
+    for (i = 0; i < items.length; i += 1) {
+        if (isSameItem(item, items[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Structure
+ * item.head {string}
+ *     .body {array of string}
+ * closure.kernel {array of item}
+ *        .nonkernel {array of item}
+ */
+function calcClosure(grammar, items) {
+    'use strict';
+    var i, j, k, key, item,
+        closure = {};
+    closure.kernel = [].concat(items);
+    closure.nonkernel = [];
+    for (i = 0; i < items.length; i += 1) {
+        for (j = 0; j < items[i].body.length; j += 1) {
+            if (items[i].body[j] === '.' && j + 1 < items[i].body.length) {
+                key = items[i].body[j + 1];
+                if (grammar.hasOwnProperty(key)) {
+                    for (k = 0; k < grammar[key].length; k += 1) {
+                        item = {
+                            head: key,
+                            body: ['.'].concat(grammar[key][k])
+                        };
+                        if (!isInItems(item, closure.nonkernel)) {
+                            closure.nonkernel.push(item);
+                            items.push(item);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return closure;
+}
+
 if (typeof require === 'function') {
     exports.parseGrammar = parseGrammar;
     exports.leftFactoring = leftFactoring;
@@ -395,4 +460,5 @@ if (typeof require === 'function') {
     exports.calcFirsts = calcFirsts;
     exports.calcFollows = calcFollows;
     exports.constructLL1ParsingTable = constructLL1ParsingTable;
+    exports.calcClosure = calcClosure;
 }
