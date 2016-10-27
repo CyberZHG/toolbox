@@ -7,6 +7,7 @@ https://cyberzhg.github.io/toolbox/index
 https://cyberzhg.github.io/toolbox/left_fact
 https://cyberzhg.github.io/toolbox/left_rec
 https://cyberzhg.github.io/toolbox/ll1
+https://cyberzhg.github.io/toolbox/lr0
 https://cyberzhg.github.io/toolbox/nfa2dfa
 https://cyberzhg.github.io/toolbox/random_hex
 https://cyberzhg.github.io/toolbox/regex2nfa

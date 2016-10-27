@@ -54,7 +54,8 @@ describe('Syntax', function () {
                         }
                     ],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I1', function () {
@@ -88,7 +89,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I2', function () {
@@ -122,7 +124,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I3', function () {
@@ -148,7 +151,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I4', function () {
@@ -199,7 +203,8 @@ describe('Syntax', function () {
                         }
                     ],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I5', function () {
@@ -225,7 +230,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I6', function () {
@@ -268,7 +274,8 @@ describe('Syntax', function () {
                         }
                     ],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I7', function () {
@@ -303,7 +310,8 @@ describe('Syntax', function () {
                         }
                     ],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I8', function () {
@@ -337,7 +345,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I9', function () {
@@ -371,7 +380,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I10', function () {
@@ -397,7 +407,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
         it('Example | I11', function () {
@@ -423,7 +434,8 @@ describe('Syntax', function () {
                     ],
                     nonkernel: [],
                 };
-            assert.deepEqual(expect, actual);
+            assert.deepEqual(expect.kernel, actual.kernel);
+            assert.deepEqual(expect.nonkernel, actual.nonkernel);
         });
 
     });
