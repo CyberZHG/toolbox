@@ -1,6 +1,6 @@
 /*jslint browser: true*/
-/*global window, parseGrammar, constructLR0Automaton, $*/
-/*
+/*global window, parseGrammar, constructLR0Automaton, genAutomatonLR0, $*/
+
 $(document).ready(function () {
     'use strict';
 
@@ -33,6 +33,7 @@ $(document).ready(function () {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
+        /*
     function showParsingTable(grammar, table) {
         var i, j, k,
             keys = Object.keys(grammar),
@@ -86,6 +87,7 @@ $(document).ready(function () {
         html += '</table>';
         $('#parsing_table').html(html);
     }
+        */
 
     $('#button_construct').click(function () {
         var grammar = parseGrammar($('#input_grammar').val()),
@@ -94,7 +96,9 @@ $(document).ready(function () {
             input = b64EncodeUnicode($('#input_grammar').val());
         $('#input_url').val(prefix + input);
         $('#alert_error').hide();
-        showParsingTable(grammar, table);
+        // showParsingTable(grammar, table);
+        $('svg').attr("width", $('svg').parent().width());
+        genAutomatonLR0('svg', automaton);
     });
 
     var input = getParameterByName('regex');
@@ -105,4 +109,3 @@ $(document).ready(function () {
     }
 
 });
-*/

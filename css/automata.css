@@ -7,3 +7,12 @@
 foreignobject {
     color: #000;
 }
+
+.node rect,
+.node circle,
+.node ellipse,
+.node polygon {
+  stroke: #000;
+  fill: #FFF;
+  fill-opacity: 0;
+}
