@@ -165,7 +165,6 @@ function genAutomatonLR0(svgId, start) {
         node = queue[front];
         ids[node.key] = node;
         label = 'I' + node.num + '\n===\n' + prettyPrintItems(node.kernel) + '\n---\n' + prettyPrintItems(node.nonkernel);
-        console.log(node.key, label);
         g.setNode(node.key, {shape: 'rect', label: label});
         keys = Object.keys(node.edges);
         for (i = 0; i < keys.length; i += 1) {

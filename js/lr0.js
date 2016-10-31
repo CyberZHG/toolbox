@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global window, parseGrammar, constructLR0Automaton, genAutomatonLR0, $*/
+/*global window, parseGrammar, calcFollows, constructLR0Automaton, genAutomatonLR0, $*/
 
 $(document).ready(function () {
     'use strict';
@@ -33,70 +33,91 @@ $(document).ready(function () {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-        /*
-    function showParsingTable(grammar, table) {
-        var i, j, k,
+    function showParsingTable(grammar, follows, automaton) {
+        var i, j,
             keys = Object.keys(grammar),
             symbol,
             symbols = [],
+            queue = [automaton],
+            front = 0,
+            node,
+            nums,
+            nodes = {'0': automaton},
             html = '';
-        for (i = 0; i < keys.length; i += 1) {
-            symbol = Object.keys(table[keys[i]]);
+        if (!follows) {
+            return;
+        }
+        while (front < queue.length) {
+            node = queue[front];
+            front += 1;
+            symbol = Object.keys(node.edges);
             for (j = 0; j < symbol.length; j += 1) {
-                if (symbol[j] !== '$' && symbols.indexOf(symbol[j]) < 0) {
-                    symbols.push(symbol[j]);
+                if (symbol[j] !== '$') {
+                    if (keys.indexOf(symbol[j]) < 0 && symbols.indexOf(symbol[j]) < 0) {
+                        symbols.push(symbol[j]);
+                    }
+                }
+                if (!nodes.hasOwnProperty(node.edges[symbol[j]].num)) {
+                    nodes[node.edges[symbol[j]].num] = node.edges[symbol[j]];
+                    queue.push(node.edges[symbol[j]]);
                 }
             }
         }
         symbols.sort();
         symbols.push('$');
+
         html += '<table class="table">';
         html += '<thead>';
         html += '<tr>';
-        html += '<th>Head</th>';
+        html += '<th style="vertical-align: middle" class="text-center" rowspan="2">STATE</th>';
+        html += '<th class="text-center" colspan="' + symbols.length + '">ACTION</th>';
+        html += '<th class="text-center" colspan="' + keys.length + '">GOTO</th>';
+        html += '</tr>';
+        html += '<tr>';
         for (i = 0; i < symbols.length; i += 1) {
             html += '<th>' + symbols[i] + '</th>';
+        }
+        for (i = 0; i < keys.length; i += 1) {
+            html += '<th>' + keys[i] + '</th>';
         }
         html += '</tr>';
         html += '</thead>';
         html += '<tbody>';
-        for (i = 0; i < keys.length; i += 1) {
+        nums = Object.keys(nodes);
+        for (i = 0; i < nums.length; i += 1) {
             html += '<tr>';
-            html += '<td>' + keys[i] + '</td>';
+            html += '<td>' + nums[i] + '</td>';
+            node = nodes[nums[i]];
             for (j = 0; j < symbols.length; j += 1) {
-                if (table[keys[i]].hasOwnProperty(symbols[j])) {
-                    if (table[keys[i]][symbols[j]].length > 1) {
-                        html += '<td class="text-danger">';
-                    } else {
-                        html += '<td>';
-                    }
-                    for (k = 0; k < table[keys[i]][symbols[j]].length; k += 1) {
-                        if (k > 0) {
-                            html += '<br>';
-                        }
-                        html += [keys[i], '->'].concat(table[keys[i]][symbols[j]][k]).join(' ');
-                    }
-                    html += '</td>';
+                if (node.edges.hasOwnProperty(symbols[j])) {
+                    html += '<td>s' + node.edges[symbols[j]].num + '</td>';
                 } else {
                     html += '<td></td>';
                 }
             }
-            html += '</tr>';
+            for (j = 0; j < keys.length; j += 1) {
+                if (node.edges.hasOwnProperty(keys[j])) {
+                    html += '<td>' + node.edges[keys[j]].num + '</td>';
+                } else {
+                    html += '<td></td>';
+                }
+            }
+            html += '</td>';
         }
         html += '</tbody>';
         html += '</table>';
         $('#parsing_table').html(html);
     }
-        */
 
     $('#button_construct').click(function () {
         var grammar = parseGrammar($('#input_grammar').val()),
+            follows = calcFollows(grammar),
             automaton = constructLR0Automaton(grammar),
             prefix = window.location.href.split('?')[0] + '?grammar=',
             input = b64EncodeUnicode($('#input_grammar').val());
         $('#input_url').val(prefix + input);
         $('#alert_error').hide();
-        // showParsingTable(grammar, table);
+        showParsingTable(grammar, follows, automaton);
         $('svg').attr("width", $('svg').parent().width());
         genAutomatonLR0('svg', automaton);
     });
