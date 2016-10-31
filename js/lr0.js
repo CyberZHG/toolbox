@@ -75,10 +75,10 @@ $(document).ready(function () {
         html += '</tr>';
         html += '<tr>';
         for (i = 0; i < symbols.length; i += 1) {
-            html += '<th>' + symbols[i] + '</th>';
+            html += '<th class="text-center">' + symbols[i] + '</th>';
         }
         for (i = 0; i < keys.length; i += 1) {
-            html += '<th>' + keys[i] + '</th>';
+            html += '<th class="text-center">' + keys[i] + '</th>';
         }
         html += '</tr>';
         html += '</thead>';
@@ -86,18 +86,18 @@ $(document).ready(function () {
         nums = Object.keys(nodes);
         for (i = 0; i < nums.length; i += 1) {
             html += '<tr>';
-            html += '<td>' + nums[i] + '</td>';
+            html += '<td class="text-center">' + nums[i] + '</td>';
             node = nodes[nums[i]];
             for (j = 0; j < symbols.length; j += 1) {
                 if (node.edges.hasOwnProperty(symbols[j])) {
-                    html += '<td>s' + node.edges[symbols[j]].num + '</td>';
+                    html += '<td class="text-center">s' + node.edges[symbols[j]].num + '</td>';
                 } else {
                     html += '<td></td>';
                 }
             }
             for (j = 0; j < keys.length; j += 1) {
                 if (node.edges.hasOwnProperty(keys[j])) {
-                    html += '<td>' + node.edges[keys[j]].num + '</td>';
+                    html += '<td class="text-center">' + node.edges[keys[j]].num + '</td>';
                 } else {
                     html += '<td></td>';
                 }
