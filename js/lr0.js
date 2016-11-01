@@ -34,7 +34,7 @@ $(document).ready(function () {
     }
 
     function showParsingTable(grammar, follows, automaton) {
-        var i, j,
+        var i, j, k,
             keys = Object.keys(grammar),
             symbol,
             symbols = [],
@@ -43,7 +43,9 @@ $(document).ready(function () {
             node,
             nums,
             nodes = {'0': automaton},
-            html = '';
+            html = '',
+            td,
+            count;
         if (!follows) {
             return;
         }
@@ -89,10 +91,32 @@ $(document).ready(function () {
             html += '<td class="text-center">' + nums[i] + '</td>';
             node = nodes[nums[i]];
             for (j = 0; j < symbols.length; j += 1) {
+                td = '';
+                count = 0;
+                if (symbols[j] === '$' && node.accept) {
+                    count += 1;
+                    td += 'acc';
+                }
                 if (node.edges.hasOwnProperty(symbols[j])) {
-                    html += '<td class="text-center">s' + node.edges[symbols[j]].num + '</td>';
+                    if (count > 0) {
+                        td += '<br>';
+                    }
+                    count += 1;
+                    td += 's' + node.edges[symbols[j]].num;
+                }
+                if (node.reduces.hasOwnProperty(symbols[j])) {
+                    for (k = 0; k < node.reduces[symbols[j]].length; k += 1) {
+                        if (count > 0) {
+                            td += '<br>';
+                        }
+                        count += 1;
+                        td += 'r( ' + node.reduces[symbols[j]][k].head + ' -> ' + node.reduces[symbols[j]][k].body.join(' ') + ' )';
+                    }
+                }
+                if (count > 1) {
+                    html += '<td class="text-center text-danger">' + td + '</td>';
                 } else {
-                    html += '<td></td>';
+                    html += '<td class="text-center">' + td + '</td>';
                 }
             }
             for (j = 0; j < keys.length; j += 1) {
