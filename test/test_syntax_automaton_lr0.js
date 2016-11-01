@@ -49,6 +49,7 @@ describe('Syntax', function () {
                                 body: ['.', 'id']
                             }
                         ],
+                        reduces: {}
                     },
                     {
                         num: 1,
@@ -65,6 +66,7 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {}
                     },
                     {
                         num: 2,
@@ -80,6 +82,26 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {
+                            "$": [
+                                {
+                                    "head": "E",
+                                    "body": ["T"]
+                                }
+                            ],
+                            ")": [
+                                {
+                                    "head": "E",
+                                    "body": ["T"]
+                                }
+                            ],
+                            "+": [
+                                {
+                                    "head": "E",
+                                    "body": ["T"]
+                                }
+                            ]
+                        }
                     },
                     {
                         num: 3,
@@ -91,6 +113,32 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {
+                            "$": [
+                                {
+                                    "head": "T",
+                                    "body": ["F"]
+                                }
+                            ],
+                            ")": [
+                                {
+                                    "head": "T",
+                                    "body": ["F"]
+                                }
+                            ],
+                            "*": [
+                                {
+                                    "head": "T",
+                                    "body": ["F"]
+                                }
+                            ],
+                            "+": [
+                                {
+                                    "head": "T",
+                                    "body": ["F"]
+                                }
+                            ]
+                        }
                     },
                     {
                         num: 4,
@@ -127,6 +175,7 @@ describe('Syntax', function () {
                                 body: ['.', 'id']
                             }
                         ],
+                        reduces: {}
                     },
                     {
                         num: 5,
@@ -138,6 +187,32 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {
+                            "$": [
+                                {
+                                    "head": "F",
+                                    "body": ["id"]
+                                }
+                            ],
+                            ")": [
+                                {
+                                    "head": "F",
+                                    "body": ["id"]
+                                }
+                            ],
+                            "*": [
+                                {
+                                    "head": "F",
+                                    "body": ["id"]
+                                }
+                            ],
+                            "+": [
+                                {
+                                    "head": "F",
+                                    "body": ["id"]
+                                }
+                            ]
+                        }
                     },
                     {
                         num: 6,
@@ -166,6 +241,7 @@ describe('Syntax', function () {
                                 body: ['.', 'id']
                             }
                         ],
+                        reduces: {}
                     },
                     {
                         num: 7,
@@ -186,6 +262,7 @@ describe('Syntax', function () {
                                 body: ['.', 'id']
                             }
                         ],
+                        reduces: {}
                     },
                     {
                         num: 8,
@@ -201,6 +278,7 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {}
                     },
                     {
                         num: 9,
@@ -216,6 +294,26 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {
+                            "$": [
+                                {
+                                    "head": "E",
+                                    "body": ["E", "+", "T"]
+                                }
+                            ],
+                            ")": [
+                                {
+                                    "head": "E",
+                                    "body": ["E", "+", "T"]
+                                }
+                            ],
+                            "+": [
+                                {
+                                    "head": "E",
+                                    "body": ["E", "+", "T"]
+                                }
+                            ]
+                        }
                     },
                     {
                         num: 10,
@@ -227,6 +325,32 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {
+                            "$": [
+                                {
+                                    "head": "T",
+                                    "body": ["T", "*", "F"]
+                                }
+                            ],
+                            ")": [
+                                {
+                                    "head": "T",
+                                    "body": ["T", "*", "F"]
+                                }
+                            ],
+                            "*": [
+                                {
+                                    "head": "T",
+                                    "body": ["T", "*", "F"]
+                                }
+                            ],
+                            "+": [
+                                {
+                                    "head": "T",
+                                    "body": ["T", "*", "F"]
+                                }
+                            ]
+                        }
                     },
                     {
                         num: 11,
@@ -238,6 +362,32 @@ describe('Syntax', function () {
                             }
                         ],
                         nonkernel: [],
+                        reduces: {
+                            "$": [
+                                {
+                                    "head": "F",
+                                    "body": ["(", "E", ")"]
+                                }
+                            ],
+                            ")": [
+                                {
+                                    "head": "F",
+                                    "body": ["(", "E", ")"]
+                                }
+                            ],
+                            "*": [
+                                {
+                                    "head": "F",
+                                    "body": ["(", "E", ")"]
+                                }
+                            ],
+                            "+": [
+                                {
+                                    "head": "F",
+                                    "body": ["(", "E", ")"]
+                                }
+                            ]
+                        }
                     }
                 ];
             automaton[0].edges = {

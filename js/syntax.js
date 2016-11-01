@@ -474,6 +474,7 @@ function constructLR0Automaton(grammar) {
     var i, j, k,
         key,
         keys = Object.keys(grammar),
+        follows = calcFollows(grammar),
         automaton,
         queue,
         front = 0,
@@ -549,6 +550,20 @@ function constructLR0Automaton(grammar) {
                     kernels[key] = kernel;
                     closure.edges[keys[i]] = kernel;
                     queue.push(kernel);
+                }
+            }
+        }
+        closure.reduces = {};
+        for (i = 0; i < closure.kernel.length; i += 1) {
+            if (closure.kernel[i].head !== start && closure.kernel[i].body[closure.kernel[i].body.length - 1] === '.') {
+                for (j = 0; j < follows[closure.kernel[i].head].length; j += 1) {
+                    if (!closure.reduces.hasOwnProperty(follows[closure.kernel[i].head][j])) {
+                        closure.reduces[follows[closure.kernel[i].head][j]] = [];
+                    }
+                    closure.reduces[follows[closure.kernel[i].head][j]].push({
+                        head: closure.kernel[i].head,
+                        body: closure.kernel[i].body.slice(0, closure.kernel[i].body.length - 1)
+                    });
                 }
             }
         }
