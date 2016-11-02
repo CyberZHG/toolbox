@@ -146,7 +146,7 @@ $(document).ready(function () {
         genAutomatonLR0('svg', automaton);
     });
 
-    var input = getParameterByName('regex');
+    var input = getParameterByName('grammar');
     if (input) {
         input = b64DecodeUnicode(input);
         $('#input_grammar').val(input);
