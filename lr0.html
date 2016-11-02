@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LR(0)</title>
+    <title>LR(0)/SLR(1)</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
@@ -76,7 +76,7 @@
       <h4>Introduction</h4>
       <hr>
       <p>
-        Construction of automaton for LR(0) grammars.
+        Construct automaton for LR(0) grammars and construct parsing table for SLR(1) grammars.
       </p>
     </div>
   </span>
@@ -135,14 +135,14 @@ F -> ( E ) | id
   <p id="p_error"></p>
 </div>
 <div class="row">
-  <div id="parsing_table" class="col-xs-12">
-  </div>
-</div>
-<div class="row">
   <div class="col-xs-12">
     <svg id="svg" width="800">
       <g></g>
     </svg>
+  </div>
+</div>
+<div class="row">
+  <div id="parsing_table" class="col-xs-12">
   </div>
 </div>
 <div class="row">
