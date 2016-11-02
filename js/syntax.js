@@ -440,6 +440,9 @@ function calcClosure(grammar, items) {
                             head: key,
                             body: ['.'].concat(grammar[key][k])
                         };
+                        if (grammar[key][k].length === 1 && grammar[key][k][0] === 'ϵ') {
+                            item.body = ['.'];
+                        }
                         if (!isInItems(item, closure.nonkernel)) {
                             closure.nonkernel.push(item);
                             items.push(item);
