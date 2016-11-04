@@ -5,7 +5,7 @@ var assert = require('assert');
 var syntax = require('../js/syntax');
 
 describe('Syntax', function () {
-    describe('#Closure', function () {
+    describe('#Closure LR(0)', function () {
         it('Example | I0', function () {
             var grammar = syntax.parseGrammar(
                     "E' -> E\n" +
