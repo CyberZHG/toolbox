@@ -691,7 +691,7 @@ function constructLR1Automaton(grammar) {
         keys = Object.keys(grammar),
         nullables = calcNullables(grammar),
         firsts = calcFirsts(grammar, nullables),
-        // follows = calcFollows(grammar, nullables, firsts),
+        follows = calcFollows(grammar, nullables, firsts),
         automaton,
         queue,
         front = 0,
@@ -772,22 +772,22 @@ function constructLR1Automaton(grammar) {
                 }
             }
         }
-        /*
         closure.reduces = {};
         for (i = 0; i < closure.kernel.length; i += 1) {
             if (closure.kernel[i].head !== start && closure.kernel[i].body[closure.kernel[i].body.length - 1] === '.') {
                 for (j = 0; j < follows[closure.kernel[i].head].length; j += 1) {
-                    if (!closure.reduces.hasOwnProperty(follows[closure.kernel[i].head][j])) {
-                        closure.reduces[follows[closure.kernel[i].head][j]] = [];
+                    if (closure.kernel[i].lookahead.indexOf(follows[closure.kernel[i].head][j]) >= 0) {
+                        if (!closure.reduces.hasOwnProperty(follows[closure.kernel[i].head][j])) {
+                            closure.reduces[follows[closure.kernel[i].head][j]] = [];
+                        }
+                        closure.reduces[follows[closure.kernel[i].head][j]].push({
+                            head: closure.kernel[i].head,
+                            body: closure.kernel[i].body.slice(0, closure.kernel[i].body.length - 1)
+                        });
                     }
-                    closure.reduces[follows[closure.kernel[i].head][j]].push({
-                        head: closure.kernel[i].head,
-                        body: closure.kernel[i].body.slice(0, closure.kernel[i].body.length - 1)
-                    });
                 }
             }
         }
-        */
     }
     return automaton;
 }

@@ -39,7 +39,8 @@ describe('Syntax', function () {
                                 body: ['.', 'd'],
                                 lookahead: ['c', 'd']
                             }
-                        ]
+                        ],
+                        reduces: {}
                     },
                     {
                         num: 1,
@@ -52,7 +53,8 @@ describe('Syntax', function () {
                                 lookahead: ['$']
                             }
                         ],
-                        nonkernel: []
+                        nonkernel: [],
+                        reduces: {}
                     },
                     {
                         num: 2,
@@ -75,7 +77,8 @@ describe('Syntax', function () {
                                 body: ['.', 'd'],
                                 lookahead: ['$']
                             }
-                        ]
+                        ],
+                        reduces: {}
                     },
                     {
                         num: 3,
@@ -98,7 +101,8 @@ describe('Syntax', function () {
                                 body: ['.', 'd'],
                                 lookahead: ['c', 'd']
                             }
-                        ]
+                        ],
+                        reduces: {}
                     },
                     {
                         num: 4,
@@ -110,7 +114,17 @@ describe('Syntax', function () {
                                 lookahead: ['c', 'd']
                             }
                         ],
-                        nonkernel: []
+                        nonkernel: [],
+                        reduces: {
+                            'c': [{
+                                head: 'C',
+                                body: ['d']
+                            }],
+                            'd': [{
+                                head: 'C',
+                                body: ['d']
+                            }]
+                        }
                     },
                     {
                         num: 5,
@@ -122,7 +136,13 @@ describe('Syntax', function () {
                                 lookahead: ['$']
                             }
                         ],
-                        nonkernel: []
+                        nonkernel: [],
+                        reduces: {
+                            '$': [{
+                                head: 'S',
+                                body: ['C', 'C']
+                            }]
+                        }
                     },
                     {
                         num: 6,
@@ -145,7 +165,8 @@ describe('Syntax', function () {
                                 body: ['.', 'd'],
                                 lookahead: ['$']
                             }
-                        ]
+                        ],
+                        reduces: {}
                     },
                     {
                         num: 7,
@@ -157,7 +178,13 @@ describe('Syntax', function () {
                                 lookahead: ['$']
                             }
                         ],
-                        nonkernel: []
+                        nonkernel: [],
+                        reduces: {
+                            '$': [{
+                                head: 'C',
+                                body: ['d']
+                            }]
+                        }
                     },
                     {
                         num: 8,
@@ -169,7 +196,17 @@ describe('Syntax', function () {
                                 lookahead: ['c', 'd']
                             }
                         ],
-                        nonkernel: []
+                        nonkernel: [],
+                        reduces: {
+                            'c': [{
+                                head: 'C',
+                                body: ['c', 'C']
+                            }],
+                            'd': [{
+                                head: 'C',
+                                body: ['c', 'C']
+                            }]
+                        }
                     },
                     {
                         num: 9,
@@ -181,7 +218,13 @@ describe('Syntax', function () {
                                 lookahead: ['$']
                             }
                         ],
-                        nonkernel: []
+                        nonkernel: [],
+                        reduces: {
+                            '$': [{
+                                head: 'C',
+                                body: ['c', 'C']
+                            }]
+                        }
                     }
                 ];
             automaton[0].edges = {
