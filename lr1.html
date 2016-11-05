@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CyberZHG's Toolbox</title>
+    <title>LR(1)</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./lib/css/ripples.min.css">
     <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css">
     <link rel="stylesheet" href="./css/toolbox.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/lr1.css">
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -68,141 +68,96 @@
 
     <div class="container-fluid container-body">
 <!-- Body Begin -->
+<link rel="stylesheet" href="./css/automata.css">
+
 <div class="row">
-  <span class="col-md-12">
-    <h2>Contents</h2>
+  <span class="col-md-2">
+    <div class="well">
+      <h4>Introduction</h4>
+      <hr>
+      <p>
+        Construct automaton and parsing table for LR(1) grammars.
+      </p>
+    </div>
+  </span>
+  <span class="col-md-5">
+    <div class="well">
+      <h4>Supported grammars</h4>
+      <ul>
+        <li>A -> A c | A a d | b d | ϵ <br>(All tokens must be separated by space characters)</li>
+        <li>A -> A c <br>&nbsp;&nbsp;&nbsp;| A a d <br>&nbsp;&nbsp;&nbsp;| b d <br>&nbsp;&nbsp;&nbsp;| ϵ </li>
+        <li>S -> A a | b<br>A -> A c | S d | ϵ</li>
+        <li>(Copy ϵ to input if needed)</li>
+      </ul>
+    </div>
+  </span>
+  <span class="col-md-5">
+    <div class="well">
+      <h4>Examples</h4>
+      <ul>
+        <li>S -> S S + | S S * | a</li>
+        <li>S -> 0 S 1 | 0 1</li>
+        <li>S -> + S S | * S S | a</li>
+        <li>S -> S ( S ) S | ϵ</li>
+        <li>S -> S + S | S S | ( S ) | S * | a</li>
+        <li>S -> ( L ) | a L -> L , S | S</li>
+        <li>S -> a S b S | b S a S | ϵ</li>
+        <li>
+            bexpr -> bexpr or bterm | bterm <br>
+            bterm -> bterm and bfactor | bfactor <br>
+            bfactor -> not bfactor | ( bexpr ) | true | false
+        </li>
+      </ul>
+    </div>
   </span>
 </div>
+
 <div class="row">
-  <span class="col-md-12">
-    <h3>Cheat Sheet</h3>
-  </span>
+  <div class="form-group">
+    <label for="input_grammar" class="col-md-1 control-label">Input: </label>
+    <div class="col-md-11">
+<textarea type="text" class="form-control" id="input_grammar" rows="10" placeholder="">
+E -> E + T | T
+T -> T * F | F
+F -> ( E ) | id
+</textarea>
+    </div>
+  </div>
 </div>
 <div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="ascii">ASCII</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Bin, oct, dec, hex, ascii and html representation.
-  </span>
+  <div class="col-md-offset-10 col-md-2">
+    <button id="button_construct" class="btn btn-raised btn-block btn-primary">Construct</button>
+  </div>
+</div>
+<div id="alert_error" class="alert alert-dismissible alert-danger" hidden>
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Invalid Grammar</strong>
+  <p id="p_error"></p>
 </div>
 <div class="row">
-  <span class="col-md-12">
-    <h3>Encoding</h3>
-  </span>
+  <div class="col-xs-12">
+    <svg id="svg" width="800">
+      <g></g>
+    </svg>
+  </div>
 </div>
 <div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="base64_encode">Base64 Encode/Decode</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    The encoding and decoding of Base64.
-  </span>
+  <div id="parsing_table" class="col-xs-12">
+  </div>
 </div>
 <div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="url_encode">URL Encode/Decode</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    The encoding and decoding of URL.
-  </span>
+  <div class="form-group">
+    <label for="input_url" class="col-md-1 control-label">URL: </label>
+    <div class="col-md-11">
+      <input type="text" class="form-control" id="input_url" readonly>
+    </div>
+  </div>
 </div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>Random</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="random_hex">Random HEX</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Generate random hexadecimal strings.
-  </span>
-</div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>Compiler</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="regex2nfa">Regex => NFA</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Convert simple regular expressions to nondeterministic finite automaton.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="nfa2dfa">Regex => NFA => DFA</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Convert simple regular expressions to deterministic finite automaton.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="left_fact">Left factoring</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Left factoring.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="left_rec">Left recursion</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Try to eliminate left recursion.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="cfg2ll">CFG => LL(k)</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Try to convert context-free grammar to LL(k) class.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="first_follow">First &amp; Follow</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Compute first and follow sets for context-free grammars.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="lr0">LR(0)</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Construct parsing table and automaton for LR(0) grammars.
-  </span>
-</div>
+
+<script src="./lib/js/d3.v3.min.js"></script>
+<script src="./lib/js/dagre-d3.min.js"></script>
+<script src="./js/syntax.js"></script>
+<script src="./js/automata.js"></script>
 
 <!-- Body End -->
     </div>
@@ -211,7 +166,7 @@
     <script src="./lib/js/bootstrap.min.js"></script>
     <script src="./lib/js/ripples.min.js"></script>
     <script src="./lib/js/material.min.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="./js/lr1.js"></script>
     <script>
     $(function() {
         $.material.init();

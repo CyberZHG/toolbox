@@ -44,7 +44,7 @@ describe('Syntax', function () {
                             body: ['.', 'd'],
                             lookahead: ['c', 'd']
                         }
-                    ],
+                    ]
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -111,7 +111,7 @@ describe('Syntax', function () {
                             body: ['.', 'd'],
                             lookahead: ['$']
                         }
-                    ],
+                    ]
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -150,7 +150,7 @@ describe('Syntax', function () {
                             body: ['.', 'd'],
                             lookahead: ['c', 'd']
                         }
-                    ],
+                    ]
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -178,7 +178,7 @@ describe('Syntax', function () {
                             lookahead: ['c', 'd']
                         }
                     ],
-                    nonkernel: [],
+                    nonkernel: []
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -206,7 +206,7 @@ describe('Syntax', function () {
                             lookahead: ['$']
                         }
                     ],
-                    nonkernel: [],
+                    nonkernel: []
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -220,7 +220,7 @@ describe('Syntax', function () {
                 ),
                 items = [
                     {
-                        head: 'S',
+                        head: 'C',
                         body: ['c', '.', 'C'],
                         lookahead: ['$']
                     }
@@ -229,7 +229,7 @@ describe('Syntax', function () {
                 expect = {
                     kernel: [
                         {
-                            head: 'S',
+                            head: 'C',
                             body: ['c', '.', 'C'],
                             lookahead: ['$']
                         }
@@ -245,7 +245,7 @@ describe('Syntax', function () {
                             body: ['.', 'd'],
                             lookahead: ['$']
                         }
-                    ],
+                    ]
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -273,7 +273,7 @@ describe('Syntax', function () {
                             lookahead: ['$']
                         }
                     ],
-                    nonkernel: [],
+                    nonkernel: []
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -301,7 +301,7 @@ describe('Syntax', function () {
                             lookahead: ['c', 'd']
                         }
                     ],
-                    nonkernel: [],
+                    nonkernel: []
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
@@ -329,7 +329,7 @@ describe('Syntax', function () {
                             lookahead: ['$']
                         }
                     ],
-                    nonkernel: [],
+                    nonkernel: []
                 };
             assert.deepEqual(expect.kernel, actual.kernel);
             assert.deepEqual(expect.nonkernel, actual.nonkernel);
