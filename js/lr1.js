@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global window, parseGrammar, calcFollows, constructLR0Automaton, genAutomatonLR0, $*/
+/*global window, parseGrammar, calcFollows, constructLR1Automaton, genAutomatonLR1, $*/
 
 $(document).ready(function () {
     'use strict';
@@ -136,14 +136,14 @@ $(document).ready(function () {
     $('#button_construct').click(function () {
         var grammar = parseGrammar($('#input_grammar').val()),
             follows = calcFollows(grammar),
-            automaton = constructLR0Automaton(grammar),
+            automaton = constructLR1Automaton(grammar),
             prefix = window.location.href.split('?')[0] + '?grammar=',
             input = b64EncodeUnicode($('#input_grammar').val());
         $('#input_url').val(prefix + input);
         $('#alert_error').hide();
         showParsingTable(grammar, follows, automaton);
         $('svg').attr("width", $('svg').parent().width());
-        genAutomatonLR0('svg', automaton);
+        genAutomatonLR1('svg', automaton);
     });
 
     var input = getParameterByName('grammar');
