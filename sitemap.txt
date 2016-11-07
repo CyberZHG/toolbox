@@ -4,6 +4,7 @@ https://cyberzhg.github.io/toolbox/base64_encode
 https://cyberzhg.github.io/toolbox/cfg2ll
 https://cyberzhg.github.io/toolbox/first_follow
 https://cyberzhg.github.io/toolbox/index
+https://cyberzhg.github.io/toolbox/lalr
 https://cyberzhg.github.io/toolbox/left_fact
 https://cyberzhg.github.io/toolbox/left_rec
 https://cyberzhg.github.io/toolbox/ll1
