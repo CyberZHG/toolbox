@@ -14,6 +14,7 @@
  *
  * Extension:
  *   Plus:  S -> S + -> S S *
+ *   Ques:  S -> S ? -> (S | ϵ)
  *
  * @param {string} text The input regular expression
  * @return {string|object} Returns a string that is an error message if failed to parse the expression,
@@ -98,6 +99,17 @@ function parseRegex(text) {
                     virNode.sub = parts[parts.length - 1];
                     tempNode = {'begin': parts[parts.length - 1].begin, 'end': parts[parts.length - 1].end + 1};
                     tempNode.type = 'cat';
+                    tempNode.parts = [parts[parts.length - 1], virNode];
+                    parts[parts.length - 1] = tempNode;
+                } else if (text[i] === '?') {
+                    if (parts.length === 0) {
+                        return 'Error: unexpected + at ' + (begin + i) + '.';
+                    }
+                    virNode = {'begin': parts[parts.length - 1].begin, 'end': parts[parts.length - 1].end + 1};
+                    virNode.type = 'empty';
+                    virNode.sub = parts[parts.length - 1];
+                    tempNode = {'begin': parts[parts.length - 1].begin, 'end': parts[parts.length - 1].end + 1};
+                    tempNode.type = 'or';
                     tempNode.parts = [parts[parts.length - 1], virNode];
                     parts[parts.length - 1] = tempNode;
                 } else if (text[i] === 'ϵ') {
