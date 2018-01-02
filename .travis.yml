@@ -6,10 +6,10 @@ branches:
     - gh-pages
     - /.*/
 before-install:
-  - pip install pep8
+  - pip install pycodestyle
   - $(which npm) install -g jslint
 before-script:
-  - pep8 *.py
+  - pycodestyle --max-line-length=100 .
   - npm run lint
 script:
   - npm test

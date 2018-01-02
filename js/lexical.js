@@ -4,13 +4,16 @@
 /**
  * Try parsing simple regular expression to syntax tree.
  *
- * Grammars:
+ * Basic grammars:
  *   Empty: S -> ϵ
  *   Cat:   S -> S S
  *   Or:    S -> S | S
  *   Star:  S -> S *
  *   Text:  S -> [0-9a-zA-Z]
  *   S -> ( S )
+ *
+ * Extension:
+ *   Plus:  S -> S + -> S S *
  *
  * @param {string} text The input regular expression
  * @return {string|object} Returns a string that is an error message if failed to parse the expression,
@@ -23,6 +26,7 @@ function parseRegex(text) {
             sub,
             last = 0,
             node = {'begin': begin, 'end': end},
+            virNode,
             tempNode,
             stack = 0,
             parts = [];
@@ -84,6 +88,17 @@ function parseRegex(text) {
                     tempNode = {'begin': parts[parts.length - 1].begin, 'end': parts[parts.length - 1].end + 1};
                     tempNode.type = 'star';
                     tempNode.sub = parts[parts.length - 1];
+                    parts[parts.length - 1] = tempNode;
+                } else if (text[i] === '+') {
+                    if (parts.length === 0) {
+                        return 'Error: unexpected + at ' + (begin + i) + '.';
+                    }
+                    virNode = {'begin': parts[parts.length - 1].begin, 'end': parts[parts.length - 1].end + 1};
+                    virNode.type = 'star';
+                    virNode.sub = parts[parts.length - 1];
+                    tempNode = {'begin': parts[parts.length - 1].begin, 'end': parts[parts.length - 1].end + 1};
+                    tempNode.type = 'cat';
+                    tempNode.parts = [parts[parts.length - 1], virNode];
                     parts[parts.length - 1] = tempNode;
                 } else if (text[i] === 'ϵ') {
                     tempNode = {'begin': begin + i, 'end': begin + i + 1};
