@@ -105,7 +105,7 @@ $(document).ready(function () {
             now = getISOString(new Date()),
             canvas = $('#canvas_card'),
             width = canvas.parent().width(),
-            height = canvas.parent().height() * 0.6,
+            height = canvas.parent().width() * 0.4,
             params = {};
         canvas.attr('width', width);
         canvas.attr('height', height);
