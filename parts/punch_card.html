@@ -1,0 +1,30 @@
+<!-- Punch Card -->
+<div class="row">
+  <span class="col-md-4">
+    <label class="form-control">Owner: </label>
+    <input id="owner" type="text" class="form-control" placeholder="CyberZHG">
+  </span>
+  <span class="col-md-4">
+    <label class="form-control">Repository: </label>
+    <input id="repo" type="text" class="form-control" placeholder="CLRS">
+  </span>
+  <span class="col-md-4">
+    <label class="form-control">Email filter: </label>
+    <input id="author" type="text" class="form-control" placeholder="Optional">
+  </span>
+</div>
+<div class="row">
+  <span class="col-xs-12">
+    <button id="button_gen" class="btn btn-raised btn-block btn-primary">GENERATE PUNCH CARD</button>
+  </span>
+</div>
+<div class="row">
+  <span class="col-xs-12">
+    Unauthenticated requests will be limited to 60 per hour.
+  </span>
+</div>
+<div class="row">
+  <span class="col-xs-12">
+    <canvas id="canvas_card" style="width: 100%">
+  </span>
+</div>

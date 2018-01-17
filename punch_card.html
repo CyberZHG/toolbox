@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Punch Card</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="google-site-verification" content="tXyJhIUjwgDkdY4scPFF1nBiVW9co3-HjowXazdoL7I" />
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/css/ripples.min.css">
+    <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/toolbox.css">
+    <link rel="stylesheet" href="./css/punch_card.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/toolbox">Toolbox</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/toolbox">Home</a></li>
+            <li><a href="https://github.com/CyberZHG/toolbox">Repository</a></li>
+            <li><a href="https://github.com/CyberZHG/toolbox/issues">Issues</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-xs">
+            <li>
+              <a href="https://travis-ci.org/CyberZHG/toolbox">
+                <img src="https://img.shields.io/travis/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li class="hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/issues">
+                <img src="https://img.shields.io/github/issues/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li class="hidden-md hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/pulls">
+                <img src="https://img.shields.io/github/issues-pr/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li class="hidden-md hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/graphs/contributors">
+                <img src="https://img.shields.io/github/contributors/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/CyberZHG/toolbox">
+                <img src="https://img.shields.io/github/stars/CyberZHG/toolbox.svg?style=social&label=Star&maxAge=2592000">
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/CyberZHG/">
+                <img src="https://img.shields.io/github/followers/CyberZHG.svg?style=social&label=Follow&maxAge=2592000">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid container-body">
+<!-- Body Begin -->
+<div class="row">
+  <span class="col-md-4">
+    <label class="form-control">Owner: </label>
+    <input id="owner" type="text" class="form-control" placeholder="CyberZHG">
+  </span>
+  <span class="col-md-4">
+    <label class="form-control">Repository: </label>
+    <input id="repo" type="text" class="form-control" placeholder="CLRS">
+  </span>
+  <span class="col-md-4">
+    <label class="form-control">Email filter: </label>
+    <input id="author" type="text" class="form-control" placeholder="Optional">
+  </span>
+</div>
+<div class="row">
+  <span class="col-xs-12">
+    <button id="button_gen" class="btn btn-raised btn-block btn-primary">GENERATE PUNCH CARD</button>
+  </span>
+</div>
+<div class="row">
+  <span class="col-xs-12">
+    Unauthenticated requests will be limited to 60 per hour.
+  </span>
+</div>
+<div class="row">
+  <span class="col-xs-12">
+    <canvas id="canvas_card" style="width: 100%">
+  </span>
+</div>
+
+<!-- Body End -->
+    </div>
+
+    <script src="./lib/js/jquery.min.js"></script>
+    <script src="./lib/js/bootstrap.min.js"></script>
+    <script src="./lib/js/ripples.min.js"></script>
+    <script src="./lib/js/material.min.js"></script>
+    <script src="./js/punch_card.js"></script>
+    <script>
+    $(function() {
+        $.material.init();
+    });
+    </script>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-75616109-2', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </body>
+</html>
