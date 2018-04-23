@@ -72,7 +72,7 @@ $(document).ready(function () {
     if (input) {
         input = b64DecodeUnicode(input);
         $('#input_grammar').val(input);
-        $('#button_convert').click();
+        $('#button_compute').click();
     }
 
 });
