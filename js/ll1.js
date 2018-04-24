@@ -97,7 +97,7 @@ $(document).ready(function () {
         showParsingTable(grammar, table);
     });
 
-    var input = getParameterByName('regex');
+    var input = getParameterByName('grammar');
     if (input) {
         input = b64DecodeUnicode(input);
         $('#input_grammar').val(input);
