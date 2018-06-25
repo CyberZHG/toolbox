@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global window, regexToNfa, nfaToDfa, genAutomataSVG, $*/
+/*global window, regexToNfa, nfaToDfa, minDfa, genAutomataSVG, $*/
 
 $(document).ready(function () {
     'use strict';
@@ -38,8 +38,12 @@ $(document).ready(function () {
             j,
             base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             result = 0;
-        for (i = 0, j = col.length - 1; i < col.length; i += 1, j -= 1) {
-            result += Math.pow(base.length, j) * (base.indexOf(col[i]) + 1);
+        if ('1' <= col[0] && col[0] <= '9') {
+            result = parseInt(col, 10);
+        } else {
+            for (i = 0, j = col.length - 1; i < col.length; i += 1, j -= 1) {
+                result += Math.pow(base.length, j) * (base.indexOf(col[i]) + 1);
+            }
         }
         return result;
     }
@@ -74,8 +78,8 @@ $(document).ready(function () {
         html += '<table class="table">';
         html += '<thead>';
         html += '<tr>';
-        html += '<th>NFA STATE</th>';
         html += '<th>DFA STATE</th>';
+        html += '<th>Min-DFA STATE</th>';
         for (i = 0; i < symbols.length; i += 1) {
             html += '<th>' + symbols[i] + '</th>';
         }
@@ -112,12 +116,12 @@ $(document).ready(function () {
             $('#p_error').text(nfa);
             $('#alert_error').show();
         } else {
-            dfa = nfaToDfa(nfa);
+            dfa = minDfa(nfaToDfa(nfa));
             $('#dfa_table').html(genDfaTable(dfa));
             $('svg').attr('width', $('svg').parent().width());
             genAutomataSVG('svg', dfa);
-            url = prefix.replace('nfa2dfa', 'regex2nfa') + input;
-            $('#nfa_link').html('NFA: <a href="' + url + '" target="_blank" >' + url + '</a>');
+            url = prefix.replace('min_dfa', 'nfa2dfa') + input;
+            $('#dfa_link').html('NFA: <a href="' + url + '" target="_blank" >' + url + '</a>');
         }
     });
 

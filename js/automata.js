@@ -20,8 +20,8 @@ function genAutomataSVG(svgId, start) {
         zoom,
         render = new dagreD3.render();
 
-    zoom = d3.behavior.zoom().on("zoom", function () {
-        inner.attr("transform", "translate(" + d3.event.translate + ")" + "scale(" + d3.event.scale + ")");
+    zoom = d3.behavior.zoom().on('zoom', function () {
+        inner.attr('transform', 'translate(' + d3.event.translate + ')' + 'scale(' + d3.event.scale + ')');
     });
     svg.call(zoom);
     g.setNode(-1, {shape: 'text', label: 'start'});
@@ -127,7 +127,7 @@ function genAutomataSVG(svgId, start) {
     g.graph().rankdir = 'LR';
     render(inner, g);
     zoom
-        .translate([(svg.attr("width") - g.graph().width) / 2, 20])
+        .translate([(svg.attr('width') - g.graph().width) / 2, 20])
         .event(svg);
     svg.attr('height', g.graph().height * 1.5 + 40);
 }

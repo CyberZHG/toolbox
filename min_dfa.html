@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Regex => NFA => DFA</title>
+    <title>Regex => NFA => DFA => Min-DFA</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./lib/css/ripples.min.css">
     <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css">
     <link rel="stylesheet" href="./css/toolbox.css">
-    <link rel="stylesheet" href="./css/nfa2dfa.css">
+    <link rel="stylesheet" href="./css/min_dfa.css">
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -76,7 +76,7 @@
       <h4>Introduction</h4>
       <hr>
       <p>
-        Convert simple regular expressions to deterministic finite automaton. (Regex => NFA => DFA)
+        Convert simple regular expressions to minimum deterministic finite automaton. (Regex => NFA => DFA => Min-DFA)
       </p>
     </div>
   </span>
@@ -125,7 +125,7 @@
   <strong>Invalid Grammar</strong>
   <p id="p_error"></p>
 </div>
-<div id="nfa_link"></div>
+<div id="dfa_link"></div>
 <div class="row">
   <div id="dfa_table" class="col-xs-12">
   </div>
@@ -158,7 +158,7 @@
     <script src="./lib/js/bootstrap.min.js"></script>
     <script src="./lib/js/ripples.min.js"></script>
     <script src="./lib/js/material.min.js"></script>
-    <script src="./js/nfa2dfa.js"></script>
+    <script src="./js/min_dfa.js"></script>
     <script>
     $(function() {
         $.material.init();
