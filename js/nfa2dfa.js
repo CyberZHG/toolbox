@@ -118,6 +118,8 @@ $(document).ready(function () {
             genAutomataSVG('svg', dfa);
             url = prefix.replace('nfa2dfa', 'regex2nfa') + input;
             $('#nfa_link').html('NFA: <a href="' + url + '" target="_blank" >' + url + '</a>');
+            url = prefix.replace('nfa2dfa', 'min_dfa') + input;
+            $('#min_dfa_link').html('Min-DFA: <a href="' + url + '" target="_blank" >' + url + '</a>');
         }
     });
 
