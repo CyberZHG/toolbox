@@ -365,14 +365,13 @@ function minDfa(dfa) {
                 group2.push(ids[i]);
             }
         }
-        if (group2.length === 0) {
-            return [group1];
-        }
         key = group1.join(',');
         partitions[key] = group1;
         queue.push(key);
         visited[key] = 0;
-        partitions[group2.join(',')] = group2;
+        if (group2.length !== 0) {
+            partitions[group2.join(',')] = group2;
+        }
         while (front < queue.length) {
             top = queue[front];
             front += 1;
