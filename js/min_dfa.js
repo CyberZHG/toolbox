@@ -121,7 +121,7 @@ $(document).ready(function () {
             $('svg').attr('width', $('svg').parent().width());
             genAutomataSVG('svg', dfa);
             url = prefix.replace('min_dfa', 'nfa2dfa') + input;
-            $('#dfa_link').html('NFA: <a href="' + url + '" target="_blank" >' + url + '</a>');
+            $('#dfa_link').html('DFA: <a href="' + url + '" target="_blank" >' + url + '</a>');
         }
     });
 

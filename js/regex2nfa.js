@@ -34,7 +34,8 @@ $(document).ready(function () {
     }
 
     $('#button_convert').click(function () {
-        var start = regexToNfa($('#input_regex').val()),
+        var url,
+            start = regexToNfa($('#input_regex').val()),
             prefix = window.location.href.split('?')[0] + '?regex=',
             input = b64EncodeUnicode($('#input_regex').val());
         $('#input_url').val(prefix + input);
@@ -45,6 +46,8 @@ $(document).ready(function () {
         } else {
             $('svg').attr("width", $('svg').parent().width());
             genAutomataSVG('svg', start);
+            url = prefix.replace('regex2nfa', 'nfa2dfa') + input;
+            $('#dfa_link').html('DFA: <a href="' + url + '" target="_blank" >' + url + '</a>');
         }
     });
 
