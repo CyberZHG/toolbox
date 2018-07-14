@@ -57,5 +57,17 @@ describe('Lexical', function () {
             assert.equal(minDfa.trans['c,d'].trans['c,d'].key, 'D,E');
         });
 
+        it('ab|b', function () {
+            var nfa = lexical.regexToNfa('ab|b'),
+                dfa = lexical.nfaToDfa(nfa),
+                minDfa = lexical.minDfa(dfa);
+            assert.equal(minDfa.key, 'A');
+            assert.equal(minDfa.edges.length, 2);
+            assert.equal(minDfa.trans.a.key, 'B');
+            assert.equal(minDfa.trans.b.key, 'C,D');
+            assert.equal(minDfa.trans.a.edges.length, 1);
+            assert.equal(minDfa.trans.a.trans.b.key, 'C,D');
+        });
+
     });
 });

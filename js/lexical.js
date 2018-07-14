@@ -370,7 +370,9 @@ function minDfa(dfa) {
         queue.push(key);
         visited[key] = 0;
         if (group2.length !== 0) {
-            partitions[group2.join(',')] = group2;
+            key = group2.join(',');
+            partitions[key] = group2;
+            queue.push(key);
         }
         while (front < queue.length) {
             top = queue[front];
