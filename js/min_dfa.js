@@ -80,6 +80,7 @@ $(document).ready(function () {
         html += '<tr>';
         html += '<th>DFA STATE</th>';
         html += '<th>Min-DFA STATE</th>';
+        html += '<th>TYPE</th>';
         for (i = 0; i < symbols.length; i += 1) {
             html += '<th>' + symbols[i] + '</th>';
         }
@@ -90,6 +91,7 @@ $(document).ready(function () {
             html += '<tr>';
             html += '<td>{' + nodes[i].key + '}</td>';
             html += '<td>' + nodes[i].id + '</td>';
+            html += '<td>' + nodes[i].type + '</td>';
             for (j = 0; j < symbols.length; j += 1) {
                 html += '<td>';
                 if (nodes[i].trans.hasOwnProperty(symbols[j])) {
