@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "assert": "1.4.1",
-    "jslint": "0.10.3",
+    "jslint": "^0.10.3",
     "mocha": "3.0.1"
   },
   "scripts": {

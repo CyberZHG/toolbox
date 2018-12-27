@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CFG to CNF</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="google-site-verification" content="tXyJhIUjwgDkdY4scPFF1nBiVW9co3-HjowXazdoL7I" />
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/css/ripples.min.css">
+    <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/toolbox.css">
+    <link rel="stylesheet" href="./css/cfg2cnf.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/toolbox">Toolbox</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/toolbox">Home</a></li>
+            <li><a href="https://github.com/CyberZHG/toolbox">Repository</a></li>
+            <li><a href="https://github.com/CyberZHG/toolbox/issues">Issues</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-xs">
+            <li>
+              <a href="https://travis-ci.org/CyberZHG/toolbox">
+                <img src="https://img.shields.io/travis/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li class="hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/issues">
+                <img src="https://img.shields.io/github/issues/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li class="hidden-md hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/pulls">
+                <img src="https://img.shields.io/github/issues-pr/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li class="hidden-md hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/graphs/contributors">
+                <img src="https://img.shields.io/github/contributors/CyberZHG/toolbox.svg?maxAge=2592000">
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/CyberZHG/toolbox">
+                <img src="https://img.shields.io/github/stars/CyberZHG/toolbox.svg?style=social&label=Star&maxAge=2592000">
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/CyberZHG/">
+                <img src="https://img.shields.io/github/followers/CyberZHG.svg?style=social&label=Follow&maxAge=2592000">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid container-body">
+<!-- Body Begin -->
+<div class="row">
+  <span class="col-md-2">
+    <div class="well">
+      <h4>Introduction</h4>
+      <hr>
+      <p>
+        Try converting the given context free grammar to Chomsky normal form.
+      </p>
+    </div>
+  </span>
+  <span class="col-md-5">
+    <div class="well">
+      <h4>Supported grammars</h4>
+      <ul>
+        <li>A -> A c | A a d | b d | ϵ <br>(All tokens must be separated by space characters)</li>
+        <li>A -> A c <br>&nbsp;&nbsp;&nbsp;| A a d <br>&nbsp;&nbsp;&nbsp;| b d <br>&nbsp;&nbsp;&nbsp;| ϵ </li>
+        <li>S -> A a | b<br>A -> A c | S d | ϵ</li>
+        <li>(Copy ϵ to input if needed)</li>
+      </ul>
+    </div>
+  </span>
+  <span class="col-md-5">
+    <div class="well">
+      <h4>Examples</h4>
+      <ul>
+        <li>S -> S S + | S S * | a</li>
+        <li>S -> 0 S 1 | 0 1</li>
+        <li>S -> + S S | * S S | a</li>
+        <li>S -> S ( S ) S | ϵ</li>
+        <li>S -> S + S | S S | ( S ) | S * | a</li>
+        <li>S -> ( L ) | a L -> L , S | S</li>
+        <li>S -> a S b S | b S a S | ϵ</li>
+        <li>
+            bexpr -> bexpr or bterm | bterm <br>
+            bterm -> bterm and bfactor | bfactor <br>
+            bfactor -> not bfactor | ( bexpr ) | true | false
+        </li>
+      </ul>
+    </div>
+  </span>
+</div>
+
+<div class="row">
+  <div class="form-group">
+    <label for="input_grammar" class="col-md-1 control-label">Input: </label>
+    <div class="col-md-11">
+      <textarea type="text" class="form-control" id="input_grammar" rows="10" placeholder="A -> A c | A a d | b d | ϵ"></textarea>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-10 col-md-2">
+    <button id="button_convert" class="btn btn-raised btn-block btn-primary">Convert</button>
+  </div>
+</div>
+<div id="alert_error" class="alert alert-dismissible alert-danger" hidden>
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Invalid Grammar</strong>
+  <p id="p_error"></p>
+</div>
+<div class="row">
+  <div class="form-group">
+    <label for="output_grammar" class="col-md-1 control-label">Output: </label>
+    <div class="col-md-11">
+      <textarea type="text" class="form-control" id="output_grammar" rows="10" readonly></textarea>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+    <label for="input_url" class="col-md-1 control-label">URL: </label>
+    <div class="col-md-11">
+      <input type="text" class="form-control" id="input_url" readonly>
+    </div>
+  </div>
+</div>
+
+<script src="./js/syntax.js"></script>
+
+<!-- Body End -->
+    </div>
+
+    <script src="./lib/js/jquery.min.js"></script>
+    <script src="./lib/js/bootstrap.min.js"></script>
+    <script src="./lib/js/ripples.min.js"></script>
+    <script src="./lib/js/material.min.js"></script>
+    <script src="./js/cfg2cnf.js"></script>
+    <script>
+    $(function() {
+        $.material.init();
+    });
+    </script>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-75616109-2', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </body>
+</html>
