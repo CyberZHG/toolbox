@@ -38,5 +38,37 @@ describe('Syntax', function () {
             assert.deepEqual(expectFollows, follows);
         });
 
+        it('#11', function () {
+            var grammar = syntax.parseGrammar(
+                    "S -> A B C D\n" +
+                        "A -> b | ϵ\n" +
+                        "B -> c\n" +
+                        "C -> d\n" +
+                        "D -> e\n"
+                ),
+                keys = Object.keys(grammar),
+                nullables = syntax.calcNullables(grammar),
+                firsts = syntax.calcFirsts(grammar, nullables),
+                follows = syntax.calcFollows(grammar, nullables, firsts),
+                expectFirsts = {
+                    S: ['b', 'c'],
+                    A: ['b', 'ϵ'],
+                    B: ['c'],
+                    C: ['d'],
+                    D: ['e']
+                },
+                expectFollows = {
+                    S: ['$'],
+                    A: ['c'],
+                    B: ['d'],
+                    C: ['e'],
+                    D: ['$']
+                };
+            keys.forEach(function (key) {
+                assert.deepEqual(expectFirsts[key], firsts[key]);
+            });
+            assert.deepEqual(expectFollows, follows);
+        });
+
     });
 });
