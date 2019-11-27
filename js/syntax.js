@@ -648,9 +648,9 @@ function calcLR1Closure(grammar, items, preNullables, preFirsts) {
                                 items.push(item);
                                 hasNewItem = true;
                             } else {
-                                for (m = 0; m < items[i].lookahead; m += 1) {
-                                    if (closure.nonkernel[index].lookahead.indexOf(items[i].lookahead[m]) < 0) {
-                                        closure.nonkernel[index].lookahead.push(items[i].lookahead[m]);
+                                for(m = 0; m < item.lookahead.length; m += 1){
+                                    if(closure.nonkernel[index].lookahead.indexOf(item.lookahead[m]) < 0){
+                                        closure.nonkernel[index].lookahead.push(item.lookahead[m]);
                                         hasNewItem = true;
                                     }
                                 }
