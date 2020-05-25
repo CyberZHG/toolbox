@@ -52,21 +52,31 @@ $(document).ready(function () {
     }
 
     function removeEmpty(grammar, keys, term) {
-        var i, j, k,
-            newGeneration;
+        var i, j, k, l, currentLength,
+            newGenerations;
         for (i = 0; i < keys.length; i += 1) {
             for (j = 0; j < grammar[keys[i]].length; j += 1) {
                 if (grammar[keys[i]][j].indexOf(term) >= 0) {
-                    newGeneration = [];
+                    newGenerations = [[]];
                     for (k = 0; k < grammar[keys[i]][j].length; k += 1) {
                         if (grammar[keys[i]][j][k] !== term) {
-                            newGeneration.push(grammar[keys[i]][j][k]);
+                            for (l = 0; l < newGenerations.length; l += 1) {
+                                newGenerations[l].push(grammar[keys[i]][j][k]);
+                            }
+                        } else {
+                            currentLength = newGenerations.length;
+                            for (l = 0; l < currentLength; l += 1) {
+                                newGenerations.push(newGenerations[l].slice());
+                                newGenerations[l].push(grammar[keys[i]][j][k]);
+                            }
                         }
                     }
-                    if (newGeneration.length === 0) {
-                        newGeneration = ['ϵ'];
+                    for (l = 0; l < newGenerations.length; l += 1) {
+                        if (newGenerations[l].length === 0) {
+                            newGenerations[l] = ['ϵ'];
+                        }
+                        addNewGeneration(grammar, keys[i], newGenerations[l]);
                     }
-                    addNewGeneration(grammar, keys[i], newGeneration);
                 }
             }
         }
@@ -75,17 +85,11 @@ $(document).ready(function () {
 
     function removeEmpties(grammar) {
         var i, j,
-            // extended = {},
-            // helperIndex = 0,
             hasEmpty = true,
             keys = Object.keys(grammar);
-        // helperIndex = getHelperIndex(grammar, helperIndex);
-        // extended[getHelperKey(helperIndex)] = [[keys[0]]];
-        // grammar = Object.assign({}, extended, grammar);
-        // keys = Object.keys(grammar);
         while (hasEmpty) {
             hasEmpty = false;
-            for (i = 0; i < keys.length; i += 1) {
+            for (i = 1; i < keys.length; i += 1) {
                 for (j = 0; j < grammar[keys[i]].length; j += 1) {
                     if (grammar[keys[i]][j].length === 1 && grammar[keys[i]][j][0] === 'ϵ') {
                         grammar[keys[i]].splice(j, 1);
