@@ -6,7 +6,7 @@ branches:
     - gh-pages
     - /.*/
 before-install:
-  - pip install pycodestyle
+  - pip install --user pycodestyle
   - $(which npm) install -g jslint
 before-script:
   - pycodestyle --max-line-length=100 .
