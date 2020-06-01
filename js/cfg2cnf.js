@@ -192,7 +192,7 @@ $(document).ready(function () {
     }
 
     function removeUnreachable(grammar) {
-        var i, j, k, front = 0, term,
+        var i, j, front = 0, term,
             keys = Object.keys(grammar),
             queue = [keys[0]],
             reachable = {};
