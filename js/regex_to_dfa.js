@@ -12,9 +12,9 @@ const alphanum = `${a2z}|${A2Z}|${r0to9}`;
 
 const key_chars = `(${a2z})`;
 const catch_all =
-    "(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|!|\"|#|$|%|&|'|\\(|\\)|\\*|\\+|,|-|.|/|:|;|<|=|>|\\?|@|[|\\\\|]|^|_|`|{|\\||}|~| |\t|\n|\r|\x0b|\x0c)";
+  "(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|!|\"|#|$|%|&|'|\\(|\\)|\\*|\\+|,|-|.|/|:|;|<|=|>|\\?|@|[|\\\\|]|^|_|`|{|\\||}|~| |\t|\n|\r|\x0b|\x0c)";
 const catch_all_without_semicolon =
-    "(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|!|\"|#|$|%|&|'|\\(|\\)|\\*|\\+|,|-|.|/|:|<|=|>|\\?|@|[|\\\\|]|^|_|`|{|\\||}|~| |\t|\n|\r|\x0b|\x0c)";
+  "(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|!|\"|#|$|%|&|'|\\(|\\)|\\*|\\+|,|-|.|/|:|<|=|>|\\?|@|[|\\\\|]|^|_|`|{|\\||}|~| |\t|\n|\r|\x0b|\x0c)";
 
 const email_chars = `${alphanum}|_|.|-`;
 const base_64 = `(${alphanum}|\\+|/|=)`;
@@ -34,68 +34,68 @@ let order_invariant_header_regex_raw = `(((\\n|^)(((from):([A-Za-z0-9 _."@-]+<)?
 
 // Note that this is not complete and very case specific i.e. can only handle a-z and not a-c.
 function regexToMinDFASpec(str) {
-    // Replace all A-Z with A2Z etc
-    let combined_nosep = str
-        .replaceAll("A-Z", A2Z_nosep)
-        .replaceAll("a-z", a2z_nosep)
-        .replaceAll("0-9", r0to9_nosep)
-        .replaceAll("\\w", A2Z_nosep + r0to9_nosep + a2z_nosep);
+  // Replace all A-Z with A2Z etc
+  let combined_nosep = str
+    .replaceAll("A-Z", A2Z_nosep)
+    .replaceAll("a-z", a2z_nosep)
+    .replaceAll("0-9", r0to9_nosep)
+    .replaceAll("\\w", A2Z_nosep + r0to9_nosep + a2z_nosep);
 
-    function addPipeInsideBrackets(str) {
-        let result = "";
-        let insideBrackets = false;
-        for (let i = 0; i < str.length; i++) {
-            if (str[i] === "[") {
-                result += str[i];
-                insideBrackets = true;
-                continue;
-            } else if (str[i] === "]") {
-                insideBrackets = false;
-            }
-            result += insideBrackets ? "|" + str[i] : str[i];
+  function addPipeInsideBrackets(str) {
+    let result = "";
+    let insideBrackets = false;
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === "[") {
+        result += str[i];
+        insideBrackets = true;
+        continue;
+      } else if (str[i] === "]") {
+        insideBrackets = false;
+      }
+      result += insideBrackets ? "|" + str[i] : str[i];
+    }
+    return result.replaceAll("[|", "[").replaceAll("[", "(").replaceAll("]", ")");
+  }
+
+  function checkIfBracketsHavePipes(str) {
+    let result = true;
+    let insideBrackets = false;
+    let indexAt = 0;
+    for (let i = 0; i < str.length; i++) {
+      if (indexAt >= str.length) break;
+      if (str[indexAt] === "[") {
+        insideBrackets = true;
+        indexAt++;
+        continue;
+      } else if (str[indexAt] === "]") {
+        insideBrackets = false;
+      }
+      if (insideBrackets) {
+        if (str[indexAt] === "|") {
+          indexAt++;
+        } else {
+          result = false;
+          return result;
         }
-        return result.replaceAll("[|", "[").replaceAll("[", "(").replaceAll("]", ")");
+      }
+      if (str[indexAt] === "\\") {
+        indexAt++;
+      }
+      indexAt++;
     }
+    return result;
+  }
 
-    function checkIfBracketsHavePipes(str) {
-        let result = true;
-        let insideBrackets = false;
-        let indexAt = 0;
-        for (let i = 0; i < str.length; i++) {
-            if (indexAt >= str.length) break;
-            if (str[indexAt] === "[") {
-                insideBrackets = true;
-                indexAt++;
-                continue;
-            } else if (str[indexAt] === "]") {
-                insideBrackets = false;
-            }
-            if (insideBrackets) {
-                if (str[indexAt] === "|") {
-                    indexAt++;
-                } else {
-                    result = false;
-                    return result;
-                }
-            }
-            if (str[indexAt] === "\\") {
-                indexAt++;
-            }
-            indexAt++;
-        }
-        return result;
-    }
+  let combined;
+  if (!checkIfBracketsHavePipes(combined_nosep)) {
+    console.log("Adding pipes within brackets between everything!");
+    combined = addPipeInsideBrackets(combined_nosep);
+    console.log(checkIfBracketsHavePipes(combined), " if false, did not add brackets correctly!");
+  } else {
+    combined = combined_nosep;
+  }
 
-    let combined;
-    if (!checkIfBracketsHavePipes(combined_nosep)) {
-        console.log("Adding pipes within brackets between everything!");
-        combined = addPipeInsideBrackets(combined_nosep);
-        print(checkIfBracketsHavePipes(combined), " if false, did not add brackets correctly!");
-    } else {
-        combined = combined_nosep;
-    }
-
-    return combined;
+  return combined;
 }
 
 // TODO: Add to test
@@ -118,18 +118,18 @@ function regexToMinDFASpec(str) {
 // console.log(Buffer.from(regex).toString('base64'));
 
 function toNature(col) {
-    var i,
-        j,
-        base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        result = 0;
-    if ("1" <= col[0] && col[0] <= "9") {
-        result = parseInt(col, 10);
-    } else {
-        for (i = 0, j = col.length - 1; i < col.length; i += 1, j -= 1) {
-            result += Math.pow(base.length, j) * (base.indexOf(col[i]) + 1);
-        }
+  var i,
+    j,
+    base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    result = 0;
+  if ("1" <= col[0] && col[0] <= "9") {
+    result = parseInt(col, 10);
+  } else {
+    for (i = 0, j = col.length - 1; i < col.length; i += 1, j -= 1) {
+      result += Math.pow(base.length, j) * (base.indexOf(col[i]) + 1);
     }
-    return result;
+  }
+  return result;
 }
 
 // let gen_graph = function (regex) {
@@ -180,6 +180,6 @@ function toNature(col) {
 // };
 
 if (typeof require === "function") {
-    exports.regexToMinDFASpec = regexToMinDFASpec;
-    exports.toNature = toNature;
+  exports.regexToMinDFASpec = regexToMinDFASpec;
+  exports.toNature = toNature;
 }
