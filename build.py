@@ -9,8 +9,7 @@ MAGIC_CSS = 'EAC9ED81'
 MAGIC_JS = 'BB33DD4B'
 MAGIC_TEMPLATE = '3B893512'
 
-def update():
-    last = {}
+def update(last={}):
     last_modified = os.path.getmtime(TEMPLATE_FILE)
     if MAGIC_TEMPLATE in last and last[MAGIC_TEMPLATE] != last_modified:
         last = {}
@@ -26,6 +25,8 @@ def update():
         last_modified = os.path.getmtime(file_path)
         if file_name in last and last_modified == last[file_name]:
             continue
+        if file_name in last:
+            print(last[file_name], last_modified)
         has_modification = True
         last[file_name] = last_modified
         print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' Starting: ' + file_name)
@@ -57,13 +58,15 @@ def update():
                     continue
                 writer.write('https://mindfa.onrender.com/' + file_name[:-5] + '\n')
     print("Done!")
+    return last
 
 # If we are passed the arg parameter --live, then run update() in a while true loop
 import sys
 
-if sys.argv and sys.argv[0] == '--live':
+if sys.argv and sys.argv[1] == '--live':
+    last = {}
     while True:
-        update()
+        last = update(last)
         sleep(3)
 
 update()
