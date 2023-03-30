@@ -119,14 +119,23 @@ $(document).ready(function () {
         let inputValue = "";
         // Both input elements have characters
         if (inputRegex && inputRegexRaw) {
-            $("#p_error").text("Error: Both input fields cannot have values at the same time.");
-            $("#alert_error").show();
+            if (inputRegex == regexToMinDFASpec(inputRegexRaw)) {
+                inputValue = inputRegex;
+            } else {
+                $("#p_error").text("Error: Input fields conflict: cannot have non-corresponding values at the same time.");
+                $("#alert_error").show();
+                return;
+            }
         } else if (inputRegexRaw || inputRegex) {
             // Determine the input value to process
             inputValue = inputRegex ? inputRegex : regexToMinDFASpec(inputRegexRaw);
+            if (inputRegexRaw) {
+                $("#input_regex").val(inputValue);
+            }
         } else {
-            $("#p_error").text("Error: You must fill at least one field.");
+            $("#p_error").text("Error: You must fill at least one field. Consider this raw regex: ([a-zA-Z0-9\\+]+b*)*");
             $("#alert_error").show();
+            return;
         }
 
         var nfa = regexToNfa(inputValue),
@@ -139,6 +148,7 @@ $(document).ready(function () {
         if (typeof nfa === "string") {
             $("#p_error").text(nfa);
             $("#alert_error").show();
+            return;
         } else {
             dfa = minDfa(nfaToDfa(nfa));
             $("#dfa_table").html(genDfaTable(dfa));
