@@ -1,3 +1,9 @@
-.well li, #input_regex {
+.well li,
+#input_regex {
+    font-family: Consolas;
+}
+
+.well li,
+#input_regex_raw {
     font-family: Consolas;
 }

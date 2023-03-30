@@ -9,9 +9,8 @@ MAGIC_CSS = 'EAC9ED81'
 MAGIC_JS = 'BB33DD4B'
 MAGIC_TEMPLATE = '3B893512'
 
-last = {}
-while True:
-    sleep(3)
+def update():
+    last = {}
     last_modified = os.path.getmtime(TEMPLATE_FILE)
     if MAGIC_TEMPLATE in last and last[MAGIC_TEMPLATE] != last_modified:
         last = {}
@@ -29,7 +28,7 @@ while True:
             continue
         has_modification = True
         last[file_name] = last_modified
-        print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' ' + file_name)
+        print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' Starting: ' + file_name)
         with open(file_path) as reader:
             title = reader.readline().strip()[4:-3].strip()
             prefix = file_name[:-5]
@@ -47,10 +46,24 @@ while True:
                            .replace(MAGIC_JS, prefix)
         with open(file_name, 'w') as writer:
             writer.write(html)
+        print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' Finished: ' + file_name)
     if has_modification:
+        print("Modification detected")
         with open('sitemap.txt', 'w') as writer:
-            writer.write('https://cyberzhg.github.io/toolbox/\n')
+            print("Writing sitemap")
+            writer.write('https://mindfa.onrender.com/\n')
             for file_name in os.listdir(PARTS_FOLDER):
                 if file_name[-5:] != '.html':
                     continue
-                writer.write('https://cyberzhg.github.io/toolbox/' + file_name[:-5] + '\n')
+                writer.write('https://mindfa.onrender.com/' + file_name[:-5] + '\n')
+    print("Done!")
+
+# If we are passed the arg parameter --live, then run update() in a while true loop
+import sys
+
+if sys.argv and sys.argv[0] == '--live':
+    while True:
+        update()
+        sleep(3)
+
+update()
