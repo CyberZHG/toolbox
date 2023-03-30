@@ -63,7 +63,7 @@ def update(last={}):
 # If we are passed the arg parameter --live, then run update() in a while true loop
 import sys
 
-if sys.argv and sys.argv[1] == '--live':
+if sys.argv and len(sys.argv) > 1 and sys.argv[1] == '--live':
     last = {}
     while True:
         last = update(last)
