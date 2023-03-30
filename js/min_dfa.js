@@ -117,16 +117,9 @@ $(document).ready(function () {
         const inputRegex = $("#input_regex").val();
         const inputRegexRaw = $("#input_regex_raw").val();
         let inputValue = "";
+
         // Both input elements have characters
-        if (inputRegex && inputRegexRaw) {
-            if (inputRegex == regexToMinDFASpec(inputRegexRaw)) {
-                inputValue = inputRegex;
-            } else {
-                $("#p_error").text("Error: Input fields conflict: cannot have non-corresponding values at the same time.");
-                $("#alert_error").show();
-                return;
-            }
-        } else if (inputRegexRaw || inputRegex) {
+        if (inputRegexRaw || inputRegex) {
             // Determine the input value to process
             inputValue = inputRegex ? inputRegex : regexToMinDFASpec(inputRegexRaw);
             if (inputRegexRaw) {
