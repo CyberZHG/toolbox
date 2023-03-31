@@ -52,7 +52,12 @@ function regexToMinDFASpec(str) {
       } else if (str[i] === "]") {
         insideBrackets = false;
       }
-      result += insideBrackets ? "|" + str[i] : str[i];
+      let str_to_add = str[i];
+      if (str[i] === "\\") {
+        i++;
+        str_to_add += str[i];
+      }
+      result += insideBrackets ? "|" + str_to_add : str_to_add;
     }
     return result.replaceAll("[|", "[").replaceAll("[", "(").replaceAll("]", ")");
   }
