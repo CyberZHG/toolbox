@@ -19,10 +19,14 @@ def update(last={}):
             template = reader.read()
     last[MAGIC_TEMPLATE] = last_modified
     has_modification = False
+
+    # Fo each files in the parts folder, rebuild it (if modified) and write it to the build folder
     for file_name in os.listdir(PARTS_FOLDER):
         if file_name[-5:] != '.html':
             continue
         file_path = os.path.join(PARTS_FOLDER, file_name)
+
+        # If the file has not been modified, skip it
         last_modified = os.path.getmtime(file_path)
         if file_name in last and last_modified == last[file_name]:
             continue
@@ -31,6 +35,14 @@ def update(last={}):
         has_modification = True
         last[file_name] = last_modified
         print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' Starting: ' + file_name)
+
+        # Make JS and CSS folders
+        build_css_folder = os.path.join(BUILD_FOLDER, 'css')
+        build_js_folder = os.path.join(BUILD_FOLDER, 'js')
+        os.makedirs(build_css_folder, exist_ok=True)
+        os.makedirs(build_js_folder, exist_ok=True)
+
+        # Move over JS, CSS, HTML files
         with open(file_path) as reader:
             title = reader.readline().strip()[4:-3].strip()
             prefix = file_name[:-5]
@@ -42,6 +54,20 @@ def update(last={}):
             if not os.path.exists(js_path):
                 with open(js_path, 'w') as writer:
                     pass
+
+            # Copy CSS and JS files from top level to build
+            build_css_folder = os.path.join(BUILD_FOLDER, 'css')
+            build_js_folder = os.path.join(BUILD_FOLDER, 'js')
+            build_css_path = os.path.join(build_css_folder, prefix + '.css')
+            build_js_path = os.path.join(build_js_folder, prefix + '.js')
+            with open(build_css_path, 'w') as css_writer:
+                with open(css_path, 'r') as css_reader:
+                    css_writer.write(css_reader.read())
+            with open(build_js_path, 'w') as js_writer:
+                with open(js_path, 'r') as js_reader:
+                    js_writer.write(js_reader.read())
+
+            # Replace the magic strings in the template with the contents of the file
             html = template.replace(MAGIC_TITLE, title) \
                            .replace(MAGIC_BODY, reader.read()) \
                            .replace(MAGIC_CSS, prefix) \
