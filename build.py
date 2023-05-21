@@ -1,5 +1,5 @@
 import os
-from time import sleep, strftime, gmtime
+from time import sleep, strftime, gmtime  
 
 TEMPLATE_FILE = 'template.html'
 PARTS_FOLDER = 'parts'
@@ -19,6 +19,12 @@ def update(last={}):
             template = reader.read()
     last[MAGIC_TEMPLATE] = last_modified
     has_modification = False
+
+    # Copy the lib/ folder into build/lib/
+    lib_folder = 'lib'
+    build_lib_folder = os.path.join(BUILD_FOLDER, 'lib')
+
+    os.system(f'cp -r {lib_folder} {build_lib_folder}')
 
     # Fo each files in the parts folder, rebuild it (if modified) and write it to the build folder
     for file_name in os.listdir(PARTS_FOLDER):
