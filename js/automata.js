@@ -23,6 +23,7 @@ function genAutomataSVG(svgId, start) {
     inner = svg.select("g"),
     zoom,
     render = new dagreD3.render();
+
   zoom = d3.behavior.zoom().on("zoom", function () {
     inner.attr("transform", "translate(" + d3.event.translate + ")" + "scale(" + d3.event.scale + ")");
   });
