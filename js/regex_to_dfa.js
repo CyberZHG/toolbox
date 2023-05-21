@@ -32,12 +32,15 @@ const r0to9_nosep = "0123456789";
 
 // TODO: Note that this is replicated code in lexical.js as well
 // Note that ^ has to be manually replaced with \x80 in the regex
-const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f", "^": String.fromCharCode(128) };
+const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f" };
 let whitespace = Object.values(escapeMap);
 const slash_s = whitespace.join("|");
 
 // The test_regex function whose return needs to be edited
-// Note that in order to specify some strings in regex, we must use \\ to escape \'s i.e. in the \r\n being expressed as a \ then an r character, not a single \r character
+// Note that in order to specify some strings in regex, we must use \\ to escape \'s.
+// For instance, matching the literal + is represented as \\+.
+// However, matching the literal \r (ascii 60) character is still \r
+// Matching \ then an r as two characters would be \\r in the js string literal
 function test_regex() {
   // let to_from_regex_old = '(\r\n|\x80)(to|from):([A-Za-z0-9 _."@-]+<)?[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.]+>?\r\n';
   // let regex = `\r\ndkim-signature:(${key_chars}=${catch_all_without_semicolon}+; )+bh=${base_64}+; `;

@@ -140,7 +140,7 @@ function parseRegex(text) {
   let i = 0;
   while (i < text.length) {
     if (text[i] == "\\") {
-      const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f", "^": String.fromCharCode(128) };
+      const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f" };
       const char = text[i + 1];
       new_text.push([escapeMap[char] || char]);
       i += 2;

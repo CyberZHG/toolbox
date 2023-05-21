@@ -10,7 +10,7 @@ function genAutomataSVG(svgId, start) {
   "use strict";
 
   // Function to recursively replace escape characters in edge labels
-  const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f", "^": String.fromCharCode(128) };
+  const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f" };
 
   var ids = {},
     node,
