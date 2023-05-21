@@ -17,8 +17,13 @@ const catch_all_without_semicolon =
   "(0|1|2|3|4|5|6|7|8|9|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|!|\"|#|$|%|&|'|\\(|\\)|\\*|\\+|,|-|.|/|:|<|=|>|\\?|@|[|\\\\|]|^|_|`|{|\\||}|~| |\t|\n|\r|\x0b|\x0c)";
 
 const email_chars = `${alphanum}|_|.|-`;
-const base_64 = `(${alphanum}|\\+|/|=)`;
-const word_char = `(${alphanum}|_)`;
+const base_64_group = `(${alphanum}|\\+|/|=)`;
+const word_char_group = `(${alphanum}|_)`;
+
+// TODO: Note that this is replicated code in lexical.js as well
+const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f", "^": String.fromCharCode(128) };
+let whitespace = Object.values(escapeMap);
+const slash_s = whitespace.join("|");
 
 // let to_from_regex_old = '(\r\n|\x80)(to|from):([A-Za-z0-9 _."@-]+<)?[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.]+>?\r\n';
 // let regex = `\r\ndkim-signature:(${key_chars}=${catch_all_without_semicolon}+; )+bh=${base_64}+; `;
@@ -39,7 +44,9 @@ function regexToMinDFASpec(str) {
     .replaceAll("A-Z", A2Z_nosep)
     .replaceAll("a-z", a2z_nosep)
     .replaceAll("0-9", r0to9_nosep)
-    .replaceAll("\\w", A2Z_nosep + r0to9_nosep + a2z_nosep);
+    .replaceAll("\\w", A2Z_nosep + r0to9_nosep + a2z_nosep + "_")
+    .replaceAll("\\d", r0to9_nosep)
+    .replaceAll("\\s", slash_s);
 
   function addPipeInsideBrackets(str) {
     let result = "";
@@ -65,6 +72,7 @@ function regexToMinDFASpec(str) {
   function checkIfBracketsHavePipes(str) {
     let result = true;
     let insideBrackets = false;
+    let insideParens = false;
     let indexAt = 0;
     for (let i = 0; i < str.length; i++) {
       if (indexAt >= str.length) break;
@@ -75,6 +83,11 @@ function regexToMinDFASpec(str) {
       } else if (str[indexAt] === "]") {
         insideBrackets = false;
       }
+      if (str[indexAt] === "(") {
+        insideParens = true;
+      } else if (str[indexAt] === ")") {
+        insideParens = false;
+      }
       if (insideBrackets) {
         if (str[indexAt] === "|") {
           indexAt++;
@@ -82,6 +95,9 @@ function regexToMinDFASpec(str) {
           result = false;
           return result;
         }
+      }
+      if (!insideParens && str[indexAt] === "|") {
+        console.log("Error: | outside of parens!");
       }
       if (str[indexAt] === "\\") {
         indexAt++;
