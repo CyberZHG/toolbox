@@ -164,7 +164,7 @@ function regexToMinDFASpec(str) {
   function checkIfBracketsHavePipes(str) {
     let result = true;
     let insideBrackets = false;
-    let insideParens = false;
+    let insideParens = 0;
     let indexAt = 0;
     for (let i = 0; i < str.length; i++) {
       if (indexAt >= str.length) break;
@@ -176,9 +176,9 @@ function regexToMinDFASpec(str) {
         insideBrackets = false;
       }
       if (str[indexAt] === "(") {
-        insideParens = true;
+        insideParens++;
       } else if (str[indexAt] === ")") {
-        insideParens = false;
+        insideParens--;
       }
       if (insideBrackets) {
         if (str[indexAt] === "|") {

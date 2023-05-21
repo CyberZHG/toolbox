@@ -3,6 +3,7 @@ from time import sleep, strftime, gmtime
 
 TEMPLATE_FILE = 'template.html'
 PARTS_FOLDER = 'parts'
+BUILD_FOLDER = 'build'
 MAGIC_TITLE = 'FC32C705'
 MAGIC_BODY = '75CAF6CF'
 MAGIC_CSS = 'EAC9ED81'
@@ -45,7 +46,11 @@ def update(last={}):
                            .replace(MAGIC_BODY, reader.read()) \
                            .replace(MAGIC_CSS, prefix) \
                            .replace(MAGIC_JS, prefix)
-        with open(file_name, 'w') as writer:
+                            
+        if not os.path.exists(BUILD_FOLDER):
+            os.makedirs(BUILD_FOLDER)
+
+        with open(BUILD_FOLDER + "/" + file_name, 'w') as writer:
             writer.write(html)
         print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' Finished: ' + file_name)
     if has_modification:
