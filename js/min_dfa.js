@@ -144,6 +144,7 @@ $(document).ready(function () {
       return;
     } else {
       dfa = minDfa(nfaToDfa(nfa));
+      // console.log("DFA: ", JSON.stringify(dfa));
       $("#dfa_table").html(genDfaTable(dfa));
       $("svg").attr("width", $("svg").parent().width());
       genAutomataSVG("svg", dfa);

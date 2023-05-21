@@ -8,6 +8,8 @@
  */
 function genAutomataSVG(svgId, start) {
   "use strict";
+  // Function to recursively replace escape characters in edge labels
+  const escapeMap = { n: "\n", r: "\r", t: "\t", v: "\v", f: "\f", "^": String.fromCharCode(128) };
   var ids = {},
     node,
     next,
@@ -37,7 +39,11 @@ function genAutomataSVG(svgId, start) {
     g.setNode(node.id, { shape: node.type, label: node.id });
     for (i = 0; i < node.edges.length; i += 1) {
       next = node.edges[i][1];
-      g.setEdge(node.id, next.id, { label: node.edges[i][0] });
+      var label = node.edges[i][0];
+      for (var escapeKey in escapeMap) {
+        label = label.replace("\\" + escapeKey, "\\\\" + escapeKey);
+      }
+      g.setEdge(node.id, next.id, { label: label });
       if (!ids.hasOwnProperty(next.id)) {
         queue.push(next);
       }
