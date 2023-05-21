@@ -46,7 +46,7 @@ def update(last={}):
                            .replace(MAGIC_BODY, reader.read()) \
                            .replace(MAGIC_CSS, prefix) \
                            .replace(MAGIC_JS, prefix)
-                            
+
         if not os.path.exists(BUILD_FOLDER):
             os.makedirs(BUILD_FOLDER)
 
@@ -55,7 +55,7 @@ def update(last={}):
         print(strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' Finished: ' + file_name)
     if has_modification:
         print("Modification detected")
-        with open('sitemap.txt', 'w') as writer:
+        with open(BUILD_FOLDER + "/" + 'sitemap.txt', 'w') as writer:
             print("Writing sitemap")
             writer.write('https://mindfa.onrender.com/\n')
             for file_name in os.listdir(PARTS_FOLDER):
