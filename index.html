@@ -1,307 +1,261 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>CyberZHG's Toolbox</title>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-        <meta name="google-site-verification" content="tXyJhIUjwgDkdY4scPFF1nBiVW9co3-HjowXazdoL7I" />
-        <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="./lib/css/ripples.min.css" />
-        <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css" />
-        <link rel="stylesheet" href="./css/toolbox.css" />
-        <link rel="stylesheet" href="./css/index.css" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/toolbox">Toolbox</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/toolbox">Home</a></li>
-                        <li><a href="https://github.com/CyberZHG/toolbox">Repository</a></li>
-                        <li><a href="https://github.com/CyberZHG/toolbox/issues">Issues</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right hidden-xs">
-                        <li>
-                            <a href="https://travis-ci.org/CyberZHG/toolbox">
-                                <img src="https://img.shields.io/travis/CyberZHG/toolbox.svg?maxAge=2592000" />
-                            </a>
-                        </li>
-                        <li class="hidden-sm hidden-xs">
-                            <a href="https://github.com/CyberZHG/toolbox/issues">
-                                <img src="https://img.shields.io/github/issues/CyberZHG/toolbox.svg?maxAge=2592000" />
-                            </a>
-                        </li>
-                        <li class="hidden-md hidden-sm hidden-xs">
-                            <a href="https://github.com/CyberZHG/toolbox/pulls">
-                                <img src="https://img.shields.io/github/issues-pr/CyberZHG/toolbox.svg?maxAge=2592000" />
-                            </a>
-                        </li>
-                        <li class="hidden-md hidden-sm hidden-xs">
-                            <a href="https://github.com/CyberZHG/toolbox/graphs/contributors">
-                                <img src="https://img.shields.io/github/contributors/CyberZHG/toolbox.svg?maxAge=2592000" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/CyberZHG/toolbox">
-                                <img src="https://img.shields.io/github/stars/CyberZHG/toolbox.svg?style=social&label=Star&maxAge=2592000" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/CyberZHG/">
-                                <img src="https://img.shields.io/github/followers/CyberZHG.svg?style=social&label=Follow&maxAge=2592000" />
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container-fluid container-body">
-            <!-- Body Begin -->
-            <div class="row">
-  <span class="col-md-12">
-    <h2>Contents</h2>
-  </span>
-</div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>Cheat Sheet</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="ascii">ASCII</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Bin, oct, dec, hex, ascii and html representation.
-  </span>
-</div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>Encoding</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="base64_encode">Base64 Encode/Decode</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    The encoding and decoding of Base64.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="url_encode">URL Encode/Decode</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    The encoding and decoding of URL.
-  </span>
-</div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>Random</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="random_hex">Random HEX</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Generate random hexadecimal strings.
-  </span>
-</div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>GitHub</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="punch_card">Punch Card</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Generate punch card for a public repo.
-  </span>
-</div>
-<div class="row">
-  <span class="col-md-12">
-    <h3>Compiler</h3>
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="regex2nfa">Regex => NFA</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Convert simple regular expressions to nondeterministic finite automaton.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="nfa2dfa">Regex => NFA => DFA</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Convert simple regular expressions to deterministic finite automaton.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="min_dfa">Regex => NFA => DFA => Min-DFA</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Convert simple regular expressions to minimum deterministic finite automaton.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="left_fact">Left factoring</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Left factoring.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="left_rec">Left recursion</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Try to eliminate left recursion.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="cfg2ll">CFG => LL(k)</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Try to convert context-free grammar to LL(k) class.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="cfg2cnf">CFG => CNF</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Try to convert context-free grammar to Chomsky normal form.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="first_follow">First &amp; Follow</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Compute first and follow sets for context-free grammars.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="lr0">LR(0)/SLR(1)</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Construct parsing table and automaton for LR(0)/SLR(1) grammars.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="lr1">LR(1)</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Construct parsing table and automaton for LR(1) grammars.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="lalr">LALR</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Construct parsing table and automaton for LALR grammars.
-  </span>
-</div>
-<div class="row">
-  <span class="col-sm-1 hidden-sm hidden-xs">
-  </span>
-  <span class="col-sm-3 col-xs-12">
-    <a href="cyk">CYK</a>
-  </span>
-  <span class="col-sm-8 col-xs-12">
-    Construction of parsing tables using CYK algorithm for CNF grammars.
-  </span>
-</div>
-
-            <!-- Body End -->
+  <head>
+    <title>CyberZHG's Toolbox</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="google-site-verification" content="tXyJhIUjwgDkdY4scPFF1nBiVW9co3-HjowXazdoL7I" />
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./lib/css/ripples.min.css" />
+    <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css" />
+    <link rel="stylesheet" href="./css/toolbox.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/toolbox">Toolbox</a>
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/toolbox">Home</a></li>
+            <li><a href="https://github.com/CyberZHG/toolbox">Repository</a></li>
+            <li><a href="https://github.com/CyberZHG/toolbox/issues">Issues</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-xs">
+            <li>
+              <a href="https://travis-ci.org/CyberZHG/toolbox">
+                <img src="https://img.shields.io/travis/CyberZHG/toolbox.svg?maxAge=2592000" />
+              </a>
+            </li>
+            <li class="hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/issues">
+                <img src="https://img.shields.io/github/issues/CyberZHG/toolbox.svg?maxAge=2592000" />
+              </a>
+            </li>
+            <li class="hidden-md hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/pulls">
+                <img src="https://img.shields.io/github/issues-pr/CyberZHG/toolbox.svg?maxAge=2592000" />
+              </a>
+            </li>
+            <li class="hidden-md hidden-sm hidden-xs">
+              <a href="https://github.com/CyberZHG/toolbox/graphs/contributors">
+                <img src="https://img.shields.io/github/contributors/CyberZHG/toolbox.svg?maxAge=2592000" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/CyberZHG/toolbox">
+                <img src="https://img.shields.io/github/stars/CyberZHG/toolbox.svg?style=social&label=Star&maxAge=2592000" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/CyberZHG/">
+                <img src="https://img.shields.io/github/followers/CyberZHG.svg?style=social&label=Follow&maxAge=2592000" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-        <script src="./lib/js/jquery.min.js"></script>
-        <script src="./lib/js/bootstrap.min.js"></script>
-        <script src="./lib/js/ripples.min.js"></script>
-        <script src="./lib/js/material.min.js"></script>
-        <script src="./js/index.js"></script>
-        <script>
-            $(function () {
-                $.material.init();
-            });
-        </script>
+    <div class="container-fluid container-body">
+      <!-- Body Begin -->
+      <div class="row">
+        <span class="col-md-12">
+          <h2>Contents (Note: Go to https://zkregex.com/min_dfa to access the edited min-dfa tool)</h2>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-md-12">
+          <h3>CyberZHG's Original Toolbox</h3>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-md-12">
+          <h3>Cheat Sheet</h3>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="ascii">ASCII</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Bin, oct, dec, hex, ascii and html representation. </span>
+      </div>
+      <div class="row">
+        <span class="col-md-12">
+          <h3>Encoding</h3>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="base64_encode">Base64 Encode/Decode</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> The encoding and decoding of Base64. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="url_encode">URL Encode/Decode</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> The encoding and decoding of URL. </span>
+      </div>
+      <div class="row">
+        <span class="col-md-12">
+          <h3>Random</h3>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="random_hex">Random HEX</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Generate random hexadecimal strings. </span>
+      </div>
+      <div class="row">
+        <span class="col-md-12">
+          <h3>GitHub</h3>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="punch_card">Punch Card</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Generate punch card for a public repo. </span>
+      </div>
+      <div class="row">
+        <span class="col-md-12">
+          <h3>Compiler</h3>
+        </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="regex2nfa">Regex => NFA</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Convert simple regular expressions to nondeterministic finite automaton. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="nfa2dfa">Regex => NFA => DFA</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Convert simple regular expressions to deterministic finite automaton. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="min_dfa">Regex => NFA => DFA => Min-DFA</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Convert simple regular expressions to minimum deterministic finite automaton. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="left_fact">Left factoring</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Left factoring. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="left_rec">Left recursion</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Try to eliminate left recursion. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="cfg2ll">CFG => LL(k)</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Try to convert context-free grammar to LL(k) class. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="cfg2cnf">CFG => CNF</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Try to convert context-free grammar to Chomsky normal form. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="first_follow">First &amp; Follow</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Compute first and follow sets for context-free grammars. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="lr0">LR(0)/SLR(1)</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Construct parsing table and automaton for LR(0)/SLR(1) grammars. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="lr1">LR(1)</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Construct parsing table and automaton for LR(1) grammars. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="lalr">LALR</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Construct parsing table and automaton for LALR grammars. </span>
+      </div>
+      <div class="row">
+        <span class="col-sm-1 hidden-sm hidden-xs"> </span>
+        <span class="col-sm-3 col-xs-12">
+          <a href="cyk">CYK</a>
+        </span>
+        <span class="col-sm-8 col-xs-12"> Construction of parsing tables using CYK algorithm for CNF grammars. </span>
+      </div>
 
-        <!-- Google Analytics -->
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i["GoogleAnalyticsObject"] = r;
-                (i[r] =
-                    i[r] ||
-                    function () {
-                        (i[r].q = i[r].q || []).push(arguments);
-                    }),
-                    (i[r].l = 1 * new Date());
-                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m);
-            })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+      <!-- Body End -->
+    </div>
 
-            ga("create", "UA-75616109-2", "auto");
-            ga("send", "pageview");
-        </script>
-    </body>
+    <script src="./lib/js/jquery.min.js"></script>
+    <script src="./lib/js/bootstrap.min.js"></script>
+    <script src="./lib/js/ripples.min.js"></script>
+    <script src="./lib/js/material.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+      $(function () {
+        $.material.init();
+      });
+    </script>
+
+    <!-- Google Analytics -->
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+
+      ga("create", "UA-75616109-2", "auto");
+      ga("send", "pageview");
+    </script>
+  </body>
 </html>
