@@ -69,12 +69,12 @@ function test_regex() {
 
   // -- GENERIC COMMANDS --
   let raw_subject_regex = `((\r\n)|^)subject:[a-zA-Z]+ (\$)?[0-9]+(.[0-9]+)? [a-zA-Z]+ to (${email_address_regex}|0x[0-9a-fA_F]+)\r\n`;
+  //   console.log(format_regex_printable(raw_subject_regex));
 
   // -------- OTHER FIELD REGEXES --------
   let raw_from_regex = `(\r\n|^)from:([A-Za-z0-9 _.,"@-]+)<[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.-]+>\r\n`;
   // let message_id_regex = `(\r\n|^)message-id:<[=@.\\+_-a-zA-Z0-9]+>\r\n`;
   let regex = regexToMinDFASpec(raw_subject_regex);
-  // console.log(format_regex_printable(regex));
 
   // console.log(raw_regex, "\n", regex);
   // let order_invariant_header_regex_raw = `(((\\n|^)(((from):([A-Za-z0-9 _."@-]+<)?[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.]+>)?|(subject:[a-zA-Z 0-9]+)?|((to):([A-Za-z0-9 _."@-]+<)?[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.]+>)?)(\\r))+)`;

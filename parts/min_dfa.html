@@ -9,9 +9,9 @@
       <p>Convert simple regular expressions to minimum deterministic finite automaton. (Regex => NFA => DFA => Min-DFA)</p>
       <br />
       <p>
-        Raw regex on top supports only the ranges a-z, A-Z, and 0-9. Any escaped character like \+ or \@ will be interpreted to literally match the + and @ symbol respectively.
-        Note that \@ is redundant and can be simply passed as @ as well. Escaped whitespace characters like \n, \t, \r etc are special cased to match the single character (i.e.
-        like '\n') etc. We also support \w for a-zA-Z0-9and underscore, \d for 0-9, and \s for whitespace characters. Any other escaped character will be interpreted as
+        Raw regex on top supports only the ranges a-z, A-Z, and 0-9. You can escape single characters like \+ or \@ will be interpreted to literally match the + and @ symbol
+        respectively. Note that \@ is redundant and can be simply passed as @ as well. Escaped whitespace characters like \n, \t, \r etc are special cased to match the single
+        character (i.e. like '\n') etc. We also support \w for a-zA-Z0-9_, \d for 0-9, and \s for whitespace characters (\t\r\n\v\f).
       </p>
     </div>
   </span>
