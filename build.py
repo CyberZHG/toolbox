@@ -87,11 +87,11 @@ def update(last={}):
         print("Modification detected")
         with open(BUILD_FOLDER + "/" + 'sitemap.txt', 'w') as writer:
             print("Writing sitemap")
-            writer.write('https://mindfa.onrender.com/\n')
+            writer.write('https://zkregex.com/\n')
             for file_name in os.listdir(PARTS_FOLDER):
                 if file_name[-5:] != '.html':
                     continue
-                writer.write('https://mindfa.onrender.com/' + file_name[:-5] + '\n')
+                writer.write('https://zkregex.com/' + file_name[:-5] + '\n')
     print("Done!")
     return last
 
