@@ -135,7 +135,12 @@ function genAutomataSVG(svgId, start) {
   g.graph().rankdir = "LR";
   render(inner, g);
   svg.attr("height", g.graph().height * 1.5 + 40);
-  var scale = svg.attr("height") / g.graph().height;
+  var hscale = svg.attr("height") / g.graph().height;
+  var wscale = svg.attr("width") / (g.graph().width+40);
+  var scale = hscale;
+  if (hscale > wscale) {
+    scale = wscale;
+  }
   zoom.scale(scale).event(svg);
   zoom
     .translate([(svg.attr("width") - g.graph().width * scale) / 2, 10])
@@ -216,7 +221,12 @@ function genAutomatonLR0(svgId, start) {
   g.graph().rankdir = "LR";
   render(inner, g);
   svg.attr("height", g.graph().height * 1.5 + 40);
-  var scale = svg.attr("height") / g.graph().height;
+  var hscale = svg.attr("height") / g.graph().height;
+  var wscale = svg.attr("width") / (g.graph().width + 40);
+  var scale = hscale;
+  if (hscale > wscale) {
+    scale = wscale;
+  }
   zoom.scale(scale).event(svg);
   zoom
     .translate([(svg.attr("width") - g.graph().width * scale) / 2, 10])
@@ -297,7 +307,12 @@ function genAutomatonLR1(svgId, start) {
   g.graph().rankdir = "LR";
   render(inner, g);
   svg.attr("height", g.graph().height * 1.5 + 40);
-  var scale = svg.attr("height") / g.graph().height;
+  var hscale = svg.attr("height") / g.graph().height;
+  var wscale = svg.attr("width") / (g.graph().width + 40);
+  var scale = hscale;
+  if (hscale > wscale) {
+    scale = wscale;
+  }
   zoom.scale(scale).event(svg);
   zoom
     .translate([(svg.attr("width") - g.graph().width * scale) / 2, 10])
