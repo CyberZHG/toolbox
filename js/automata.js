@@ -134,8 +134,12 @@ function genAutomataSVG(svgId, start) {
   };
   g.graph().rankdir = "LR";
   render(inner, g);
-  zoom.translate([(svg.attr("width") - g.graph().width) / 2, 20]).event(svg);
   svg.attr("height", g.graph().height * 1.5 + 40);
+  var scale = svg.attr("height") / g.graph().height;
+  zoom.scale(scale).event(svg);
+  zoom
+    .translate([(svg.attr("width") - g.graph().width * scale) / 2, 10])
+    .event(svg);
 }
 
 function genAutomatonLR0(svgId, start) {
@@ -211,8 +215,12 @@ function genAutomatonLR0(svgId, start) {
 
   g.graph().rankdir = "LR";
   render(inner, g);
-  zoom.translate([(svg.attr("width") - g.graph().width) / 2, 20]).event(svg);
   svg.attr("height", g.graph().height * 1.5 + 40);
+  var scale = svg.attr("height") / g.graph().height;
+  zoom.scale(scale).event(svg);
+  zoom
+    .translate([(svg.attr("width") - g.graph().width * scale) / 2, 10])
+    .event(svg);
 }
 
 function genAutomatonLR1(svgId, start) {
@@ -288,6 +296,10 @@ function genAutomatonLR1(svgId, start) {
 
   g.graph().rankdir = "LR";
   render(inner, g);
-  zoom.translate([(svg.attr("width") - g.graph().width) / 2, 20]).event(svg);
   svg.attr("height", g.graph().height * 1.5 + 40);
+  var scale = svg.attr("height") / g.graph().height;
+  zoom.scale(scale).event(svg);
+  zoom
+    .translate([(svg.attr("width") - g.graph().width * scale) / 2, 10])
+    .event(svg);
 }
