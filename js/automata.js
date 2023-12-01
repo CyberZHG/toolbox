@@ -53,6 +53,24 @@ function genAutomataSVG(svgId, start) {
     front += 1;
   }
 
+  for (let index = 0; index < Object.keys(ids).length; index++) {
+    d3.selectAll(".node" + index.toString())
+      .on("mouseover", function (event) {
+        d3.selectAll("#ellipse" + index.toString())
+          .transition()
+          .duration("50")
+          .attr("fill", "#419488")
+          .attr("fill-opacity", "1");
+      })
+      .on("mouseout", function (d, i) {
+        d3.selectAll("#ellipse" + index.toString())
+          .transition()
+          .duration("50")
+          .attr("fill", "white")
+          .attr("fill-opacity", "0");
+      });
+  }
+
   render.shapes().text = function (parent, bbox, node) {
     var w = bbox.width,
       h = bbox.height,
@@ -90,7 +108,27 @@ function genAutomataSVG(svgId, start) {
         .attr("fill", "white")
         .attr("fill-opacity", "0")
         .attr("stroke", "black")
-        .attr("transform", "translate(" + -w / 2 + "," + -h / 2 + ")");
+        .attr("transform", "translate(" + -w / 2 + "," + -h / 2 + ")")
+        .attr("id", "ellipse" + node.label)
+        .on("mouseover", function (d, i) {
+          d3.select(this)
+            .transition()
+            .duration("50")
+            .attr("fill", "#419488")
+            .attr("fill-opacity", "1");
+          d3.selectAll(".node" + node.label).style(
+            "background-color",
+            "#419488"
+          );
+        })
+        .on("mouseout", function (d, i) {
+          d3.select(this)
+            .transition()
+            .duration("50")
+            .attr("fill", "white")
+            .attr("fill-opacity", "0");
+          d3.selectAll(".node" + node.label).style("background-color", null);
+        });
 
     node.intersect = function (point) {
       return dagreD3.intersect.ellipse(node, rx, ry, point);
@@ -108,24 +146,61 @@ function genAutomataSVG(svgId, start) {
         .insert("ellipse", ":first-child")
         .attr("cx", point.x)
         .attr("cy", point.y)
-        .attr("rx", rx)
-        .attr("ry", ry)
+        .attr("rx", rx - 2)
+        .attr("ry", ry - 2)
         .attr("accept", "")
         .attr("fill", "white")
         .attr("fill-opacity", "0")
         .attr("stroke", "black")
-        .attr("transform", "translate(" + -w / 2 + "," + -h / 2 + ")");
+        .attr("transform", "translate(" + -w / 2 + "," + -h / 2 + ")")
+        .attr("id", "ellipse" + node.label)
+        .on("mouseover", function (d, i) {
+          d3.select(this)
+            .transition()
+            .duration("50")
+            .attr("fill", "#419488")
+            .attr("fill-opacity", "1");
+          d3.selectAll(".node" + node.label).style(
+            "background-color",
+            "#419488"
+          );
+        })
+        .on("mouseout", function (d, i) {
+          d3.select(this)
+            .transition()
+            .duration("50")
+            .attr("fill", "white")
+            .attr("fill-opacity", "0");
+          d3.selectAll(".node" + node.label).style("background-color", null);
+        });
     shapeSvg = parent
       .insert("ellipse", ":first-child")
       .attr("cx", point.x)
       .attr("cy", point.y)
-      .attr("rx", rx - 2)
-      .attr("ry", ry - 2)
+      .attr("rx", rx)
+      .attr("ry", ry)
       .attr("accept", "")
       .attr("fill", "white")
       .attr("fill-opacity", "0")
       .attr("stroke", "black")
-      .attr("transform", "translate(" + -w / 2 + "," + -h / 2 + ")");
+      .attr("transform", "translate(" + -w / 2 + "," + -h / 2 + ")")
+      .attr("id", "ellipse" + node.label)
+      .on("mouseover", function (d, i) {
+        d3.select(this)
+          .transition()
+          .duration("50")
+          .attr("fill", "#419488")
+          .attr("fill-opacity", "1");
+        d3.selectAll(".node" + node.label).style("background-color", "#419488");
+      })
+      .on("mouseout", function (d, i) {
+        d3.select(this)
+          .transition()
+          .duration("50")
+          .attr("fill", "white")
+          .attr("fill-opacity", "0");
+        d3.selectAll(".node" + node.label).style("background-color", null);
+      });
 
     node.intersect = function (point) {
       return dagreD3.intersect.ellipse(node, rx, ry, point);

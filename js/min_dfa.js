@@ -141,14 +141,16 @@ $(document).ready(function () {
     for (i = 0; i < nodes.length; i += 1) {
       html += "<tr>";
       html += "<td>{" + groupKeys(nodes[i].key) + "}</td>";
-      html += "<td>" + nodes[i].id + "</td>";
+      html += '<td class="node' + nodes[i].id + '">' + nodes[i].id + "</td>";
       html += "<td>" + nodes[i].type + "</td>";
       for (j = 0; j < symbols.length; j += 1) {
-        html += "<td>";
         if (nodes[i].trans.hasOwnProperty(symbols[j])) {
+          html += '<td class="node' + nodes[i].trans[symbols[j]].id + '">';
           html += nodes[i].trans[symbols[j]].id;
+          html += "</td>";
+        } else {
+          html += "<td></td>";
         }
-        html += "</td>";
       }
       html += "</tr>";
     }
