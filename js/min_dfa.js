@@ -54,6 +54,51 @@ $(document).ready(function () {
     return result;
   }
 
+  function groupKeys(keys) {
+    var groupedKeys = "";
+    var keysArray = keys.split(",");
+    if (keysArray.length <= 1) {
+      return keys;
+    }
+
+    groupedKeys += keysArray[0];
+    let i = 1;
+    while (i < keysArray.length) {
+      // a-z: 97-122, A-Z: 65-90, 0-9: 48-57
+      // We have a sequence
+      if (
+        parseInt(keysArray[i].charCodeAt(0)) ==
+        parseInt(keysArray[i - 1].charCodeAt(0)) + 1
+      ) {
+        if (i == keysArray.length - 1) {
+          groupedKeys += "-" + keysArray[i];
+        }
+        i++;
+        continue;
+      } // We dont have a sequence
+      else {
+        // Did we just end a sequence?
+        if (
+          parseInt(keysArray[i].charCodeAt(0)) ==
+          parseInt(keysArray[i - 1].charCodeAt(0)) + 1
+        ) {
+          groupedKeys += "-" + keysArray[i - 1];
+        } else if (
+          i > 2 &&
+          parseInt(keysArray[i - 1].charCodeAt(0)) ==
+            parseInt(keysArray[i - 2].charCodeAt(0)) + 1
+        ) {
+          groupedKeys += "-" + keysArray[i - 1];
+          groupedKeys += "," + keysArray[i];
+        } else {
+          groupedKeys += "," + keysArray[i];
+        }
+      }
+      i++;
+    }
+    return groupedKeys;
+  }
+
   function genDfaTable(start) {
     var i,
       j,
@@ -95,7 +140,7 @@ $(document).ready(function () {
     html += "<tbody>";
     for (i = 0; i < nodes.length; i += 1) {
       html += "<tr>";
-      html += "<td>{" + nodes[i].key + "}</td>";
+      html += "<td>{" + groupKeys(nodes[i].key) + "}</td>";
       html += "<td>" + nodes[i].id + "</td>";
       html += "<td>" + nodes[i].type + "</td>";
       for (j = 0; j < symbols.length; j += 1) {
