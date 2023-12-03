@@ -1,6 +1,11 @@
 import os
 from time import sleep, strftime, gmtime
+import http.server
+import socketserver
+import sys
+from threading import Thread
 
+PORT = 8000
 TEMPLATE_FILE = 'template.html'
 PARTS_FOLDER = 'parts'
 BUILD_FOLDER = 'build'
@@ -95,11 +100,23 @@ def update(last={}):
     print("Done!")
     return last
 
-# If we are passed the arg parameter --live, then run update() in a while true loop
-import sys
+# Serve the build repo that has js folder and index.html
+class CustomHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        print(self.path)
+        if '.' not in self.path and self.path != "/":
+            self.path += '.html'
+        self.path = './build/' + self.path
+        return http.server.SimpleHTTPRequestHandler.do_GET(self)
 
 if sys.argv and len(sys.argv) > 1 and sys.argv[1] == '--live':
     last = {}
+    print("serving at port", PORT)
+    def serve_in_background():
+        with socketserver.TCPServer(("", PORT), CustomHandler) as httpd:
+            httpd.serve_forever()
+    Thread(target=serve_in_background).start()
+    
     while True:
         last = update(last)
         sleep(3)
