@@ -5,7 +5,7 @@ import socketserver
 import sys
 from threading import Thread
 
-PORT = 8000
+PORT = 8001
 TEMPLATE_FILE = 'template.html'
 PARTS_FOLDER = 'parts'
 BUILD_FOLDER = 'build'
