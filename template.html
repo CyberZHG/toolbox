@@ -6,9 +6,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
         <meta name="google-site-verification" content="tXyJhIUjwgDkdY4scPFF1nBiVW9co3-HjowXazdoL7I" />
-        <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
+        <script>
+            ["https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", "https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.min.css", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.min.css"].forEach(function(href) {
+                var link = document.createElement("link");
+                link.href = href;
+                link.type = "text/css";
+                link.rel = "stylesheet";
+                document.head.appendChild(link);
+            });
+        </script>
+        <!-- <link rel="stylesheet" href="./lib/css/bootstrap.min.css" />
         <link rel="stylesheet" href="./lib/css/ripples.min.css" />
-        <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css" />
+        <link rel="stylesheet" href="./lib/css/bootstrap-material-design.min.css" /> -->
         <link rel="stylesheet" href="./css/toolbox.css" />
         <link rel="stylesheet" href="./css/EAC9ED81.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,11 +32,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/toolbox">Toolbox</a>
+                    <a class="navbar-brand" href="/">Toolbox</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/toolbox">Home</a></li>
+                        <li class="active"><a href="/">Home</a></li>
                         <li><a href="https://github.com/zkemail/zk-regex">Library Repo</a></li>
                         <li><a href="https://github.com/zkemail/zkregex.com">Website Repo</a></li>
                     </ul>
@@ -62,17 +71,18 @@
             </div>
         </nav>
 
+        <br/>
         <div class="container-fluid container-body">
             <!-- Body Begin -->
             75CAF6CF
             <!-- Body End -->
         </div>
 
-        <script src="./lib/js/jquery.min.js"></script>
-        <script src="./lib/js/bootstrap.min.js"></script>
-        <script src="./lib/js/ripples.min.js"></script>
-        <script src="./lib/js/material.min.js"></script>
-        <script src="./js/BB33DD4B.js"></script>
+        <script src="./lib/js/jquery.min.js" type="module"></script>
+        <script src="./lib/js/bootstrap.min.js" type="module"></script>
+        <script src="./lib/js/ripples.min.js" type="module"></script>
+        <script src="./lib/js/material.min.js" type="module"></script>
+        <script src="./js/BB33DD4B.js" type="module"></script>
         <script>
             $(function () {
                 $.material.init();

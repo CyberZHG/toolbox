@@ -10,7 +10,5 @@
     "lint": "jslint ./js/*.js && jslint ./test/*.js",
     "test": "mocha"
   },
-  "dependencies": {
-    "@zk-email/zk-regex-apis": "^1.1.2"
-  }
+  "dependencies": {}
 }
