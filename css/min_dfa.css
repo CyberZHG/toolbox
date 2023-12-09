@@ -22,3 +22,7 @@ svg {
 td:hover {
   background-color: #419488;
 }
+
+.node text {
+  pointer-events: none;
+}
