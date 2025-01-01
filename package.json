@@ -4,11 +4,10 @@
   "devDependencies": {
     "assert": "1.4.1",
     "jslint": "^0.10.3",
-    "mocha": "^3.0.1"
+    "mocha": "^11.7.5"
   },
   "scripts": {
     "lint": "jslint ./js/*.js && jslint ./test/*.js",
     "test": "mocha"
-  },
-  "dependencies": {}
+  }
 }
