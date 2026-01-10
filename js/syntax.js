@@ -18,7 +18,11 @@ function parseGrammar(text) {
         if (index + 1 < tokens.length && tokens[index + 1] === '->') {
             head = tokens[index];
             index += 2;
-            grammar[head] = [[]];
+            if (head in grammar) {
+                grammar[head].push([]);
+            } else {
+                grammar[head] = [[]];
+            }
         } else if (tokens[index] === '|') {
             grammar[head].push([]);
             index += 1;
